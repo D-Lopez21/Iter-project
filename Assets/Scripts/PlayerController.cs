@@ -32,13 +32,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCooldown;
     [Space(5)]
 
+    [Header("Attack Settings")]
+    [SerializeField] Transform SideAttackTransform;
+    [SerializeField] Transform UpAttackTransform;
+    [SerializeField] Transform DownAttackTransform;
+    [SerializeField] Vector2 SideAttackArea, UpAttackArea, DownAttackArea;
+    [SerializeField] LayerMask attackableLayer;
+    [SerializeField] float damage;
+    bool attack = false;
+    float timeBetweenAttack, timeSinceAttack;
+    [Space(5)]
+
+    [Header("Recoil Settings")]
+    [SerializeField] int recoilXSteps = 5;
+    [SerializeField] int recoilYSteps = 5;
+    [SerializeField] float recoilXSpeed = 10;
+    [SerializeField] float recoilYSpeed = 10;
+    int stepsXRecoiled, stepsYRecoiled;
+
     PlayerStateList pState;
     private Rigidbody2D rb;
-    private float xAxis;
+    private float xAxis, yAxis;
     private float gravity;
     Animator anim;
     private bool canDash;
     private bool dashed;
+
+
 
     public static PlayerController Instance;
 
@@ -61,6 +81,13 @@ public class PlayerController : MonoBehaviour
         gravity = rb.gravityScale;
     }
 
+    private void OnDrawGizmos(){
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(SideAttackTransform.position, SideAttackArea);
+        Gizmos.DrawWireCube(UpAttackTransform.position, UpAttackArea);
+        Gizmos.DrawWireCube(DownAttackTransform.position, DownAttackArea);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -71,18 +98,24 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         StartDash();
+        Attack();
+        Recoil();
     }
 
     void GetInputs(){
         xAxis = Input.GetAxisRaw("Horizontal");
+        yAxis = Input.GetAxisRaw("Vertical");
+        attack = Input.GetMouseButtonDown(0);
     }
 
     private void Flip(){
         if(xAxis < 0){
             transform.localScale = new Vector2(-1, transform.localScale.y);
+            pState.lookingRight = false;
 
         }else if(xAxis > 0){
             transform.localScale = new Vector2(1, transform.localScale.y);
+            pState.lookingRight = true;
         }
     }
 
@@ -113,6 +146,93 @@ public class PlayerController : MonoBehaviour
         pState.dashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+
+    void Attack(){
+        timeSinceAttack += Time.deltaTime;
+        if(attack && timeSinceAttack >= timeBetweenAttack){
+            timeSinceAttack = 0;
+
+            if(yAxis == 0 || yAxis < 0 && Grounded()){
+                Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
+
+            }else if(yAxis > 0){
+                Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
+
+            }else if(yAxis < 0 && !Grounded()){
+                Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
+            }
+        }
+    }
+
+    private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float _recoilStrength){
+
+        Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
+        if(objectsToHit.Length > 0){
+            _recoilDir = true;
+        }
+
+        for(int i = 0; i < objectsToHit.Length; i++){
+            if(objectsToHit[i].GetComponent<Enemy>() != null){
+                objectsToHit[i].GetComponent<Enemy>().EnemyHit(damage, (transform.position - objectsToHit[i].transform.position).normalized, _recoilStrength);
+            }
+        }
+
+    }
+
+    void Recoil(){
+        if(pState.recoilingX){
+            if(pState.lookingRight){
+                rb.velocity = new Vector2(-recoilXSpeed, 0);
+
+            }else{
+                rb.velocity = new Vector2(recoilXSpeed, 0);
+            }
+        }
+
+        if(pState.recoilingY){
+            rb.gravityScale = 0;
+            if(yAxis < 0){
+                rb.velocity = new Vector2(rb.velocity.x, recoilYSpeed);
+
+            }else{
+                rb.velocity = new Vector2(rb.velocity.x, -recoilYSpeed);
+            }
+            airJumpCounter = 0;
+
+        }else{
+            rb.gravityScale = gravity;
+        }
+
+        //Stop recoil X
+        if(pState.recoilingX && stepsXRecoiled < recoilXSteps){
+            stepsXRecoiled++;
+
+        }else{
+            StopRecoilX();
+        }
+
+        //Stop recoil Y
+        if(pState.recoilingY && stepsYRecoiled < recoilYSteps){
+            stepsYRecoiled++;
+
+        }else{
+            StopRecoilY();
+        }
+
+        if(Grounded()){
+            StopRecoilY();
+        }
+    }
+
+    void StopRecoilX(){
+        stepsXRecoiled = 0;
+        pState.recoilingX = false;
+    }
+
+    void StopRecoilY(){
+        stepsYRecoiled = 0;
+        pState.recoilingY = false;
     }
 
     public bool Grounded(){

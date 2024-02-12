@@ -11,8 +11,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Attackable
-  - 
+  - Player
+  - OneWayPlatform
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 2735870069
+    locked: 0
+  - name: Ground
+    uniqueID: 587240023
     locked: 0
   - name: Default
     uniqueID: 0

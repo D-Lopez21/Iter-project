@@ -130,6 +130,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move(){
         rb.velocity = new Vector2(walkSpeed * xAxis, rb.velocity.y);
+        anim.SetBool("Walking", rb.velocity.x != 0 && Grounded());
     }
 
     void StartDash(){
@@ -296,6 +297,8 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce);
             }
         }
+
+        anim.SetBool("Jumping", !Grounded());
     }
 
     void UpdateJumpVariables(){

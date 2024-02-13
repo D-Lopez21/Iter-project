@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime;
     private int airJumpCounter = 0;
     [SerializeField] private int maxAirJumps;
-    [SerializeField] private int maxFallSpeed = -20;
+    [SerializeField] private int maxFallSpeed = 20;
     [Space(5)]
 
     [Header("Ground Check Settings")]
@@ -317,9 +317,8 @@ public class PlayerController : MonoBehaviour
     }
 
     void fallSpeedLimit(){
-        if(rb.velocity.y < maxFallSpeed){
-            rb.velocity = new Vector3(rb.velocity.x, maxFallSpeed);
-            Debug.Log(rb.velocity.y);
+        if(rb.velocity.y < -maxFallSpeed){
+            rb.velocity = new Vector3(rb.velocity.x, -maxFallSpeed);
         }
     }
 }

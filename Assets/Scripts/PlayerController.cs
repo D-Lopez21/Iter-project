@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     private float xAxis, yAxis;
     private float gravity;
     Animator anim;
-    private bool canDash;
+    private bool canDash = true;
     private bool dashed;
 
 
@@ -102,12 +102,12 @@ public class PlayerController : MonoBehaviour
         GetInputs();
         UpdateJumpVariables();
         if(pState.dashing) return;
+        Recoil();
         Flip();
         Move();
         Jump();
         StartDash();
         Attack();
-        Recoil();
         fallSpeedLimit();
     }
 
@@ -145,10 +145,9 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator Dash(){
-        
         canDash = false;
         pState.dashing = true;
-        //anim.SetTrigger("Dashing");
+        anim.SetTrigger("Dashing");
         rb.gravityScale = 0;
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
         yield return new WaitForSeconds(dashTime);

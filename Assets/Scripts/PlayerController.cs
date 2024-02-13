@@ -50,7 +50,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float recoilYSpeed = 10;
     int stepsXRecoiled, stepsYRecoiled;
 
-    PlayerStateList pState;
+    [Header("Health Settings")]
+    public int health;
+    public int maxHealth;
+    [Space(5)]
+
+    [HideInInspector] public PlayerStateList pState;
     private Rigidbody2D rb;
     private float xAxis, yAxis;
     private float gravity;
@@ -69,6 +74,8 @@ public class PlayerController : MonoBehaviour
         }else{
             Instance = this;
         }
+
+        health = maxHealth;
     }
 
 
@@ -233,6 +240,25 @@ public class PlayerController : MonoBehaviour
     void StopRecoilY(){
         stepsYRecoiled = 0;
         pState.recoilingY = false;
+    }
+
+    public void TakeDamage(float _damage)
+    {
+        health -= Mathf.RoundToInt(_damage);
+        StartCoroutine(StopTakingDamage());
+    }
+
+    IEnumerator StopTakingDamage()
+    {
+        pState.invincible = true;
+        ClampHealth();
+        yield return new WaitForSeconds(1f);
+        pState.invincible = false;
+    }
+
+    void ClampHealth()
+    {
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
 
     public bool Grounded(){

@@ -22,7 +22,14 @@ public class Goblin : Enemy
 
         if(!isRecoiling)
         {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(PlayerController.Instance.transform.position.x, transform.position.x), speed * Time.deltaTime);
+            if(PlayerController.Instance.transform.position.x < transform.position.x)
+            {
+                transform.localScale = new Vector2(-1, transform.localScale.y);
+            }else{
+                transform.localScale = new Vector2(1, transform.localScale.y);
+            }
+            
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(PlayerController.Instance.transform.position.x, transform.position.y), speed * Time.deltaTime);
         }
     }
 

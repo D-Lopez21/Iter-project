@@ -164,12 +164,15 @@ public class PlayerController : MonoBehaviour
 
             if(yAxis == 0 || yAxis < 0 && Grounded()){
                 Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
+                anim.SetTrigger("Attacking");
 
             }else if(yAxis > 0){
                 Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
+                anim.SetTrigger("UpAttacking");
 
             }else if(yAxis < 0 && !Grounded()){
                 Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
+                anim.SetTrigger("DownAttacking");
             }
         }
     }

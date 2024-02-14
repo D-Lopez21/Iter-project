@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour
     private bool dashed;
 
 
+    //Unlock variables
+    public bool unlockedDash;
+
 
     public static PlayerController Instance;
 
@@ -106,9 +109,11 @@ public class PlayerController : MonoBehaviour
         Flip();
         Move();
         Jump();
-        StartDash();
         Attack();
         fallSpeedLimit();
+        if(unlockedDash){
+            StartDash();
+        }
     }
 
     void GetInputs(){

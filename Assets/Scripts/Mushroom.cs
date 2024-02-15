@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : Enemy
+public class Mushroom : Enemy
 {
+    
+    [SerializeField] public float playerXL;
+    [SerializeField] public float playerXR;
+    [SerializeField] public float playerYU;
+    [SerializeField] public float playerYD;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +26,7 @@ public class Goblin : Enemy
     {
         base.Update();
 
-        if(!isRecoiling)
+        if(!isRecoiling && (playerXL < PlayerController.Instance.transform.position.x && PlayerController.Instance.transform.position.x < playerXR) && (playerYD < PlayerController.Instance.transform.position.y && PlayerController.Instance.transform.position.y < playerYU))
         {
             if(PlayerController.Instance.transform.position.x < transform.position.x)
             {

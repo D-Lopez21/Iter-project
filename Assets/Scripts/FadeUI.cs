@@ -23,6 +23,7 @@ public class FadeUI : MonoBehaviour
 
     IEnumerator FadeOut(float _seconds)
     {
+        
         Debug.Log("FadeOut");
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
@@ -36,18 +37,21 @@ public class FadeUI : MonoBehaviour
 
     }
     
-    IEnumerator FadeIn(float _seconds)
+IEnumerator FadeIn(float _seconds)
+{
+    Debug.Log("FadeIn");
+    canvasGroup.alpha = 0;
+    canvasGroup.interactable = false; // Asegúrate de que no sea interactuable mientras está completamente transparente.
+    canvasGroup.blocksRaycasts = false;
+    while (canvasGroup.alpha < 1)
     {
-        Debug.Log("FadeIn");
-        canvasGroup.alpha = 0;
-        while (canvasGroup.alpha < 1)
-        {
-            canvasGroup.alpha += Time.deltaTime / _seconds;
-            yield return null;
-        }
+        canvasGroup.alpha += Time.deltaTime / _seconds;
         yield return null;
-
     }
+    canvasGroup.interactable = true; // Restablece a interactuable después de hacerse visible.
+    canvasGroup.blocksRaycasts = true; // Permite el bloqueo de raycasts nuevamente.
+}
+
     // Start is called before the first frame update
     void Start()
     {

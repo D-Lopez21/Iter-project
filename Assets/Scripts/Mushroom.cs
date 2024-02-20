@@ -9,11 +9,15 @@ public class Mushroom : Enemy
     [SerializeField] public float playerXR;
     [SerializeField] public float playerYU;
     [SerializeField] public float playerYD;
+
+    Animator anim;
     
     // Start is called before the first frame update
     void Start()
     {
         rb.gravityScale = 12f;
+
+        anim = GetComponent<Animator>();
     }
 
     protected override void Awake()
@@ -25,9 +29,12 @@ public class Mushroom : Enemy
     protected override void Update()
     {
         base.Update();
-
+        
+        anim.SetBool("Walking", (playerXL < PlayerController.Instance.transform.position.x && PlayerController.Instance.transform.position.x < playerXR) && (playerYD < PlayerController.Instance.transform.position.y && PlayerController.Instance.transform.position.y < playerYU));
+        
         if(!isRecoiling && (playerXL < PlayerController.Instance.transform.position.x && PlayerController.Instance.transform.position.x < playerXR) && (playerYD < PlayerController.Instance.transform.position.y && PlayerController.Instance.transform.position.y < playerYU))
         {
+            
             if(PlayerController.Instance.transform.position.x < transform.position.x)
             {
                 transform.localScale = new Vector2(-1, transform.localScale.y);

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimeCounter = 0;
     [SerializeField] private float coyoteTime;
     private int airJumpCounter = 0;
-    [SerializeField] private int maxAirJumps;
+    [SerializeField] public int maxAirJumps;
     [SerializeField] private int maxFallSpeed = 20;
     [Space(5)]
 
@@ -56,6 +56,17 @@ public class PlayerController : MonoBehaviour
     public int maxHealth;
     [Space(5)]
 
+    [Header("Wall Jump Settings")]
+    [SerializeField] private float wallSlidingSpeed = 2f;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private float wallJumpingDuration;
+    [SerializeField] private Vector2 wallJumpingPower;
+    float wallJumpingDirection;
+    bool isWallSliding;
+    bool isWallJumping;
+    [Space(5)]
+
     [HideInInspector] public PlayerStateList pState;
     private Rigidbody2D rb;
     private float xAxis, yAxis;
@@ -67,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     //Unlock variables
     public bool unlockedDash;
+    public bool unlockedDoubleJump;
 
 
     public static PlayerController Instance;
@@ -105,12 +117,19 @@ public class PlayerController : MonoBehaviour
         GetInputs();
         UpdateJumpVariables();
         if(pState.dashing) return;
-        Recoil();
-        Flip();
-        Move();
-        Jump();
+
+        if(!isWallJumping){
+            Recoil();
+            Flip();
+            Move();
+            Jump();
+            fallSpeedLimit();
+        }
+
+        WallSlide();
+        WallJump();
+
         Attack();
-        fallSpeedLimit();
         if(unlockedDash){
             StartDash();
         }
@@ -326,9 +345,58 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool Walled(){
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+
+    }
+
+    void WallSlide(){
+        if(Walled() && !Grounded() && xAxis != 0){
+            isWallSliding = true;
+
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+
+        }else{
+            isWallSliding = false;
+        }
+    }
+
+    void WallJump(){
+
+        if(isWallSliding){
+            isWallJumping = false;
+            wallJumpingDirection = !pState.lookingRight ? 1 : -1;
+
+            CancelInvoke(nameof(StopWallJumping));
+        }
+
+        if(Input.GetButtonDown("Jump") && isWallSliding){
+
+            isWallJumping = true;
+            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+
+            dashed = false;
+            airJumpCounter = 0;
+
+            if((pState.lookingRight && transform.eulerAngles.y == 0) || (!pState.lookingRight && transform.eulerAngles.y != 0)){
+                pState.lookingRight = !pState.lookingRight;
+                int _yRotation = pState.lookingRight ? 0 : 180;
+
+                transform.eulerAngles = new Vector2(transform.eulerAngles.x, _yRotation);
+            }
+
+            Invoke(nameof(StopWallJumping), wallJumpingDuration);
+        }
+    }
+
+    void StopWallJumping(){
+        isWallJumping = false;
+    }
+
     void fallSpeedLimit(){
         if(rb.velocity.y < -maxFallSpeed){
             rb.velocity = new Vector3(rb.velocity.x, -maxFallSpeed);
         }
     }
+
 }

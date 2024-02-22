@@ -150,6 +150,10 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector2(1, transform.localScale.y);
             pState.lookingRight = true;
         }
+
+        if(transform.eulerAngles.y != 0){
+            transform.eulerAngles = new Vector2(transform.eulerAngles.x, 0);
+        }
     }
 
     private void Move(){
@@ -378,12 +382,12 @@ public class PlayerController : MonoBehaviour
             dashed = false;
             airJumpCounter = 0;
 
-            if((pState.lookingRight && transform.eulerAngles.y == 0) || (!pState.lookingRight && transform.eulerAngles.y != 0)){
-                pState.lookingRight = !pState.lookingRight;
-                int _yRotation = pState.lookingRight ? 0 : 180;
+            //if((pState.lookingRight && transform.eulerAngles.y == 0) || (!pState.lookingRight && transform.eulerAngles.y != 0)){
+            pState.lookingRight = !pState.lookingRight;
+            int _yRotation = 180;
 
-                transform.eulerAngles = new Vector2(transform.eulerAngles.x, _yRotation);
-            }
+            transform.eulerAngles = new Vector2(transform.eulerAngles.x, _yRotation);
+            //}
 
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
         }

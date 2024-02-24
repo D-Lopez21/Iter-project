@@ -17,23 +17,45 @@ public class Enemy : MonoBehaviour
 
     protected float recoilTimer;
     protected Rigidbody2D rb;
+    protected Animator anim;
+
+    protected enum EnemyStates
+    {
+        //Mushroom
+        Mush_idle,
+        Mush_walk,
+        Mush_hit,
+        Mush_die,
+    }
+    protected EnemyStates currentEnemyState;
+
+    protected virtual EnemyStates GetCurrentEnemyState
+    {
+        get{return currentEnemyState;}
+        set
+        {
+            if(currentEnemyState != value)
+            {
+                currentEnemyState = value;
+                ChangeCurrentAnimation();
+            }
+        }
+    }
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        
-    }
-
-    protected virtual void Awake(){
         rb = GetComponent<Rigidbody2D>();
-        player = PlayerController.Instance;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(health <= 0){
-            Destroy(gameObject);
-        }
+        
+        //if(health <= 0){
+        //    Destroy(gameObject);
+        //}
         if(isRecoiling){
             if(recoilTimer < recoilLength){
                 recoilTimer += Time.deltaTime;
@@ -42,6 +64,8 @@ public class Enemy : MonoBehaviour
                 isRecoiling = false;
                 recoilTimer = 0;
             }
+        }else{
+            UpdateEnemyStates();
         }
     }
 
@@ -55,10 +79,30 @@ public class Enemy : MonoBehaviour
 
     protected void OnTriggerStay2D(Collider2D _other)
     {
-        if(_other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        if(_other.CompareTag("Player") && !PlayerController.Instance.pState.invincible && health > 0)
         {
             Attack();
         }
+    }
+
+    protected virtual void Death(float _destroyTime)
+    {
+        Destroy(gameObject, _destroyTime);
+    }
+
+    protected virtual void UpdateEnemyStates()
+    {
+
+    }
+
+    protected virtual void ChangeCurrentAnimation()
+    {
+
+    }
+
+    protected void ChangeState(EnemyStates _newState)
+    {
+        GetCurrentEnemyState = _newState;
     }
 
     protected virtual void Attack()

@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
 {
 
     [SerializeField] CinemachineVirtualCamera[] allVirtualCameras;
+    [SerializeField] CinemachineVirtualCamera startingCamera;
     private CinemachineVirtualCamera currentCamera;
     private CinemachineFramingTransposer framingTransposer;
     public static CameraManager Instance;
@@ -34,6 +35,8 @@ public class CameraManager : MonoBehaviour
 
             allVirtualCameras[i].Follow = PlayerController.Instance.transform;
         }
+
+        SwapCamera(startingCamera);
     }
 
     public void SwapCamera(CinemachineVirtualCamera _newCam){

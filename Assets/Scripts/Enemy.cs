@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected float damage;
 
+    private bool alredyDead = false;
+
     protected float recoilTimer;
     protected Rigidbody2D rb;
     protected Animator anim;
@@ -87,6 +89,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Death(float _destroyTime)
     {
+        if(!alredyDead){
+            PlayerController.Instance.exp += 20;
+            alredyDead = true;
+        }
         Destroy(gameObject, _destroyTime);
     }
 

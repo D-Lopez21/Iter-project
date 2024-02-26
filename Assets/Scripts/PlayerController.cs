@@ -51,9 +51,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float recoilYSpeed = 10;
     int stepsXRecoiled, stepsYRecoiled;
 
-    [Header("Health Settings")]
-    public int health;
-    public int maxHealth;
+    [Header("Stat Settings")]
+    [SerializeField] public int health = 10;
+    [SerializeField] public int maxHealth = 10;
+    [SerializeField] private int mana;
+    [SerializeField] private int maxMana = 10;
     [Space(5)]
 
     [Header("Wall Jump Settings")]
@@ -65,6 +67,15 @@ public class PlayerController : MonoBehaviour
     float wallJumpingDirection;
     bool isWallSliding;
     bool isWallJumping;
+    [Space(5)]
+
+    [Header("Level Up settings")]
+    public int exp = 0;
+    private int currentLevel = 1;
+    [SerializeField]public int maxLevel = 10;
+    [SerializeField]private int skillPoints = 0; 
+    [SerializeField]private int expNextLevel = 100;
+    public bool skillTreeActive = false;
     [Space(5)]
 
     [HideInInspector] public PlayerStateList pState;
@@ -116,6 +127,7 @@ public class PlayerController : MonoBehaviour
     {
         GetInputs();
         UpdateJumpVariables();
+        CheckLevelUp();
         if(pState.dashing) return;
 
         if(!isWallJumping){
@@ -132,6 +144,14 @@ public class PlayerController : MonoBehaviour
         Attack();
         if(unlockedDash){
             StartDash();
+        }
+
+        if(skillPoints > 0 && !skillTreeActive){
+            showSkillTree();
+        }
+
+        if(skillTreeActive){
+            upgradeAvaible();
         }
     }
 
@@ -174,7 +194,11 @@ public class PlayerController : MonoBehaviour
         pState.dashing = true;
         anim.SetTrigger("Dashing");
         rb.gravityScale = 0;
-        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
+        if(transform.eulerAngles.y == 0){
+            rb.velocity = new Vector2(dashSpeed, 0);
+        }else{
+            rb.velocity = new Vector2(-dashSpeed, 0);
+        }
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = gravity;
         pState.dashing = false;
@@ -400,4 +424,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void CheckLevelUp(){
+        if(exp >= expNextLevel && currentLevel < maxLevel){
+            exp -= expNextLevel;
+            currentLevel++;
+            skillPoints++;
+            Debug.Log("Sube de nivel");
+            Debug.Log(currentLevel);
+        }
+    }
+
+    void showSkillTree(){
+        if(Input.GetButtonDown("SkillTree")){
+            skillTreeActive = true;
+            Debug.Log("Mejoras activas");
+        }
+    }
+
+    void upgradeAvaible(){
+        if(Input.GetButtonDown("UpgradeHealth")){
+            skillTreeActive = false;
+            skillPoints--;
+            maxHealth += 10;
+            health += 10;
+            Debug.Log(maxHealth);
+            Debug.Log("Mejora: Vida");
+
+        }else if(Input.GetButtonDown("UpgradeDamage")){
+            skillTreeActive = false;
+            skillPoints--;
+            damage += 1;
+            Debug.Log(damage);
+            Debug.Log("Mejora: Daño");
+
+        }else if(Input.GetButtonDown("UpgradeMana")){
+            skillTreeActive = false;
+            skillPoints--;
+            mana += 10;
+            maxMana += 10;
+            Debug.Log(maxMana);
+            Debug.Log("Mejora: Mana");
+        }
+    }
 }

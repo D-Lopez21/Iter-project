@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public UnityEvent<int, int> healthChanged;
+
     [Header("Horizontal Movement Settings")]
     [SerializeField] private float walkSpeed = 1;
     [Space(5)]
@@ -52,7 +56,21 @@ public class PlayerController : MonoBehaviour
     int stepsXRecoiled, stepsYRecoiled;
 
     [Header("Stat Settings")]
-    [SerializeField] public int health = 10;
+    [SerializeField] private int _health = 10;
+
+    public int Health
+    {
+        get
+        {
+            return _health;
+        }
+        set
+        {
+            _health = value;
+            healthChanged?.Invoke(_health, maxHealth);
+        }
+    }
+
     [SerializeField] public int maxHealth = 10;
     [SerializeField] private int mana;
     [SerializeField] private int maxMana = 10;
@@ -102,7 +120,7 @@ public class PlayerController : MonoBehaviour
             Instance = this;
         }
 
-        health = maxHealth;
+        Health = maxHealth;
     }
 
 
@@ -298,7 +316,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
-        health -= Mathf.RoundToInt(_damage);
+        Health -= Mathf.RoundToInt(_damage);
         StartCoroutine(StopTakingDamage());
     }
 
@@ -312,7 +330,7 @@ public class PlayerController : MonoBehaviour
 
     void ClampHealth()
     {
-        health = Mathf.Clamp(health, 0, maxHealth);
+        Health = Mathf.Clamp(Health, 0, maxHealth);
     }
 
     public bool Grounded(){
@@ -446,7 +464,7 @@ public class PlayerController : MonoBehaviour
             skillTreeActive = false;
             skillPoints--;
             maxHealth += 10;
-            health += 10;
+            Health += 10;
             Debug.Log(maxHealth);
             Debug.Log("Mejora: Vida");
 

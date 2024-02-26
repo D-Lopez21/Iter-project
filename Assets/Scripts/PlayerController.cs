@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
 
     public UnityEvent<int, int> healthChanged;
+    public UnityEvent<int, int> manaChanged;
+    public UnityEvent<int, int> expChanged;
 
     [Header("Horizontal Movement Settings")]
     [SerializeField] private float walkSpeed = 1;
@@ -72,8 +74,21 @@ public class PlayerController : MonoBehaviour
     }
 
     [SerializeField] public int maxHealth = 10;
-    [SerializeField] private int mana;
-    [SerializeField] private int maxMana = 10;
+    [SerializeField] private int _mana = 10;
+
+    public int Mana
+    {
+        get
+        {
+            return _mana;
+        }
+        set
+        {
+            _mana = value;
+            manaChanged?.Invoke(_mana, maxMana);
+        }
+    }
+    [SerializeField] public int maxMana = 10;
     [Space(5)]
 
     [Header("Wall Jump Settings")]
@@ -88,11 +103,24 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
 
     [Header("Level Up settings")]
-    public int exp = 0;
-    private int currentLevel = 1;
+    public int _exp = 0;
+
+    public int Exp
+    {
+        get
+        {
+            return _exp;
+        }
+        set
+        {
+            _exp = value;
+            expChanged?.Invoke(_exp, expNextLevel);
+        }
+    }
+    public int currentLevel = 1;
     [SerializeField]public int maxLevel = 10;
     [SerializeField]private int skillPoints = 0; 
-    [SerializeField]private int expNextLevel = 100;
+    [SerializeField]public int expNextLevel = 100;
     public bool skillTreeActive = false;
     [Space(5)]
 
@@ -443,9 +471,9 @@ public class PlayerController : MonoBehaviour
     }
 
     void CheckLevelUp(){
-        if(exp >= expNextLevel && currentLevel < maxLevel){
-            exp -= expNextLevel;
+        if(Exp >= expNextLevel && currentLevel < maxLevel){
             currentLevel++;
+            Exp -= expNextLevel;
             skillPoints++;
             Debug.Log("Sube de nivel");
             Debug.Log(currentLevel);
@@ -478,8 +506,8 @@ public class PlayerController : MonoBehaviour
         }else if(Input.GetButtonDown("UpgradeMana")){
             skillTreeActive = false;
             skillPoints--;
-            mana += 10;
             maxMana += 10;
+            Mana += 10;
             Debug.Log(maxMana);
             Debug.Log("Mejora: Mana");
         }

@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Death(float _destroyTime)
     {
         if(!alredyDead){
-            PlayerController.Instance.exp += 20;
+            PlayerController.Instance.Exp += 20;
             alredyDead = true;
         }
         Destroy(gameObject, _destroyTime);

@@ -129,6 +129,8 @@ public class PlayerController : MonoBehaviour
     private float xAxis, yAxis;
     private float gravity;
     Animator anim;
+
+    BoxCollider2D colli;
     private bool canDash = true;
     private bool dashed;
 
@@ -158,6 +160,7 @@ public class PlayerController : MonoBehaviour
         pState = GetComponent<PlayerStateList>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        colli = GetComponent<BoxCollider2D>();
         gravity = rb.gravityScale;
     }
 
@@ -192,13 +195,10 @@ public class PlayerController : MonoBehaviour
             StartDash();
         }
 
-        if(skillPoints > 0 && !skillTreeActive){
-            showSkillTree();
-        }
-
         if(skillTreeActive){
             upgradeAvaible();
         }
+        
     }
 
     void GetInputs(){
@@ -481,10 +481,8 @@ public class PlayerController : MonoBehaviour
     }
 
     void showSkillTree(){
-        if(Input.GetButtonDown("SkillTree")){
-            skillTreeActive = true;
-            Debug.Log("Mejoras activas");
-        }
+        skillTreeActive = true;
+        Debug.Log("Mejoras activas");
     }
 
     void upgradeAvaible(){
@@ -511,5 +509,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log(maxMana);
             Debug.Log("Mejora: Mana");
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D _collision){
+//        Debug.Log(_collision.gameObject.tag);
+//        if(_collision.CompareTag("Upgrade") && Input.GetButtonDown("SkillTree") && skillPoints > 0 && !skillTreeActive){
+//            showSkillTree();
+//        }
     }
 }

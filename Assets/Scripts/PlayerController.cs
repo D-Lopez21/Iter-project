@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
     }
     public int currentLevel = 1;
     [SerializeField]public int maxLevel = 10;
-    [SerializeField]private int skillPoints = 0; 
+    [SerializeField]public int skillPoints = 0; 
     [SerializeField]public int expNextLevel = 100;
     public bool skillTreeActive = false;
     [Space(5)]
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
     private float gravity;
     Animator anim;
 
-    BoxCollider2D colli;
+    public BoxCollider2D colli;
     private bool canDash = true;
     private bool dashed;
 
@@ -509,12 +509,5 @@ public class PlayerController : MonoBehaviour
             Debug.Log(maxMana);
             Debug.Log("Mejora: Mana");
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D _collision){
-//        Debug.Log(_collision.gameObject.tag);
-//        if(_collision.CompareTag("Upgrade") && Input.GetButtonDown("SkillTree") && skillPoints > 0 && !skillTreeActive){
-//            showSkillTree();
-//        }
     }
 }

@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform DownAttackTransform;
     [SerializeField] Vector2 SideAttackArea, UpAttackArea, DownAttackArea;
     [SerializeField] LayerMask attackableLayer;
-    [SerializeField] float damage;
+    [SerializeField] public float damage;
     bool attack = false;
     float timeBetweenAttack, timeSinceAttack;
     [Space(5)]

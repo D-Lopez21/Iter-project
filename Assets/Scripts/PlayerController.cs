@@ -138,6 +138,7 @@ public class PlayerController : MonoBehaviour
     //Unlock variables
     public bool unlockedDash;
     public bool unlockedDoubleJump;
+    public bool unlockedWallJump;
 
 
     public static PlayerController Instance;
@@ -187,8 +188,10 @@ public class PlayerController : MonoBehaviour
             fallSpeedLimit();
         }
 
-        WallSlide();
-        WallJump();
+        if(unlockedWallJump){
+            WallSlide();
+            WallJump();
+        }
 
         Attack();
         if(unlockedDash){

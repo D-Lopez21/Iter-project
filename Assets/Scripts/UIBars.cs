@@ -59,6 +59,12 @@ public class HealthBar : MonoBehaviour
     {
         healthSlider.value = CalculateSliderPercentage(newHealth, maxHealth);
         healthBarText.text = "HP " + newHealth + " / " + maxHealth; 
+            if(newHealth <= 0)
+    {
+        // Aquí puedes cargar la escena de "Game Over" o el menú principal
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+    }
+        
     }
 
     private void OnPlayerManaChanged(int newMana, int maxMana){
@@ -70,4 +76,5 @@ public class HealthBar : MonoBehaviour
         expSlider.value = CalculateSliderPercentage(newExp, maxExp);
         expBarText.text = "XP " + newExp + " / " + maxExp + " Nivel: " + PlayerController.Instance.currentLevel;
     }
+    
 }

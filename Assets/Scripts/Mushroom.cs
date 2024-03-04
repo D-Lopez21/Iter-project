@@ -9,21 +9,13 @@ public class Mushroom : Enemy
     [SerializeField] public float playerXR;
     [SerializeField] public float playerYU;
     [SerializeField] public float playerYD;
-    [SerializeField] public float stunDuration;
-
-    float timer;
-
-    //Animator anim;
     
     // Start is called before the first frame update
     protected override void Start()
     {
-
         base.Start();
         rb.gravityScale = 12f;
         ChangeState(EnemyStates.Mush_idle);
-
-        //anim = GetComponent<Animator>();
     }
 
     protected override void UpdateEnemyStates()
@@ -57,13 +49,6 @@ public class Mushroom : Enemy
             
             case EnemyStates.Mush_hit:
                 ChangeState(EnemyStates.Mush_walk);
-                //timer += Time.deltaTime;
-//
-                //if(timer > stunDuration)
-                //{
-                //    ChangeState(EnemyStates.Mush_walk);
-                //    timer=0;
-                //}
                 break;
             
             case EnemyStates.Mush_die:
@@ -100,30 +85,5 @@ public class Mushroom : Enemy
             anim.SetTrigger("Die");
         }
     }
-    
-    
-    
-    
-    // Update is called once per frame
-    //protected override void Update()
-    //{
-    //    base.Update();
-    //    
-    //    anim.SetBool("Walking", (playerXL < PlayerController.Instance.transform.position.x && PlayerController.Instance.transform.position.x < playerXR) && (playerYD < PlayerController.Instance.transform.position.y && PlayerController.Instance.transform.position.y < playerYU));
-    //    
-    //    if(!isRecoiling && (playerXL < PlayerController.Instance.transform.position.x && PlayerController.Instance.transform.position.x < playerXR) && (playerYD < PlayerController.Instance.transform.position.y && PlayerController.Instance.transform.position.y < playerYU))
-    //    {
-    //        
-    //        if(PlayerController.Instance.transform.position.x < transform.position.x)
-    //        {
-    //            transform.localScale = new Vector2(-1, transform.localScale.y);
-    //        }else{
-    //            transform.localScale = new Vector2(1, transform.localScale.y);
-    //        }
-    //        
-    //        transform.position = Vector2.MoveTowards(transform.position, new Vector2(PlayerController.Instance.transform.position.x, transform.position.y), speed * Time.deltaTime);
-    //    }
-    //}
-
     
 }

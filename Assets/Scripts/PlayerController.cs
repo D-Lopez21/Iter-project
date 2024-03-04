@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 1;
     [Space(5)]
 
-
+//guardar
     [Header("Vertical Movement Settings")]
     [SerializeField] private float jumpForce = 45f;
     private int jumpBufferCounter;
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
     [Space(5)]
-
+//guardar
     [Header("Attack Settings")]
     [SerializeField] Transform SideAttackTransform;
     [SerializeField] Transform UpAttackTransform;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float recoilXSpeed = 10;
     [SerializeField] float recoilYSpeed = 10;
     int stepsXRecoiled, stepsYRecoiled;
-
+//guardar
     [Header("Stat Settings")]
     [SerializeField] private int _health = 10;
 
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     bool isWallSliding;
     bool isWallJumping;
     [Space(5)]
-
+//guardar
     [Header("Level Up settings")]
     public int _exp = 0;
 
@@ -117,9 +117,10 @@ public class PlayerController : MonoBehaviour
             expChanged?.Invoke(_exp, expNextLevel);
         }
     }
-    public int currentLevel = 1;
+    
+    public int currentLevel = 1; //guardar
     [SerializeField]public int maxLevel = 10;
-    [SerializeField]public int skillPoints = 0; 
+    [SerializeField]public int skillPoints = 0; //guardar
     [SerializeField]public int expNextLevel = 100;
     public bool skillTreeActive = false;
     [Space(5)]

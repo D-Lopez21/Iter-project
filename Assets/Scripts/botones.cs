@@ -17,7 +17,10 @@ public class botones : MonoBehaviour
     }
     
     public void StartGame()
-    {
+    { 
+        if (PlayerController.Instance != null){
+            PlayerController.Instance.MenuStart();
+        }
         SceneManager.LoadScene("GameplayScene");
     }
     public void ExitGame()

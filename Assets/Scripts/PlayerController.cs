@@ -145,10 +145,12 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
 
     public void Awake(){
+
         if(Instance != null && Instance != this){
             Destroy(gameObject);
 
         }else{
+            DontDestroyOnLoad(gameObject);
             Instance = this;
         }
 
@@ -206,9 +208,14 @@ public class PlayerController : MonoBehaviour
     {
         // Carga la escena del menú principal
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+        gameObject.active = false;
     }
         
         
+    }
+
+    public void MenuStart(){
+        gameObject.active = true ;
     }
 
     void GetInputs(){

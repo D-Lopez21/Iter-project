@@ -202,6 +202,12 @@ public class PlayerController : MonoBehaviour
         if(skillTreeActive){
             upgradeAvaible();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+    {
+        // Carga la escena del menú principal
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+    }
+        
         
     }
 

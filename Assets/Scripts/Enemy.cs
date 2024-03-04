@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected PlayerController player;
     [SerializeField] protected float speed;
-
     [SerializeField] protected float damage;
 
     private bool alredyDead = false;
@@ -20,6 +19,7 @@ public class Enemy : MonoBehaviour
     protected float recoilTimer;
     protected Rigidbody2D rb;
     protected Animator anim;
+    protected SpriteRenderer sr;
 
     protected enum EnemyStates
     {
@@ -28,6 +28,12 @@ public class Enemy : MonoBehaviour
         Mush_walk,
         Mush_hit,
         Mush_die,
+
+        //Eye
+        Eye_idle,
+        Eye_chase,
+        Eye_stunned,
+        Eye_die,
     }
     protected EnemyStates currentEnemyState;
 
@@ -49,15 +55,12 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        
-        //if(health <= 0){
-        //    Destroy(gameObject);
-        //}
         if(isRecoiling){
             if(recoilTimer < recoilLength){
                 recoilTimer += Time.deltaTime;

@@ -304,7 +304,7 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         timeSinceAttack += Time.deltaTime;
-        if (attack && timeSinceAttack >= timeBetweenAttack)
+        if ((attack || Input.GetKeyDown(KeyCode.J)) && timeSinceAttack >= timeBetweenAttack)
         {
             timeSinceAttack = 0;
 

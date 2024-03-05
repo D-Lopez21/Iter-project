@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
 
+    private Vector3 respawnPoint;
     public UnityEvent<int, int> healthChanged;
     public UnityEvent<int, int> manaChanged;
     public UnityEvent<int, int> expChanged;
@@ -14,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 1;
     [Space(5)]
 
-//guardar
+    //guardar
     [Header("Vertical Movement Settings")]
     [SerializeField] private float jumpForce = 45f;
     private int jumpBufferCounter;
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
     [Space(5)]
-//guardar
+    //guardar
     [Header("Attack Settings")]
     [SerializeField] Transform SideAttackTransform;
     [SerializeField] Transform UpAttackTransform;
@@ -56,7 +58,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float recoilXSpeed = 10;
     [SerializeField] float recoilYSpeed = 10;
     int stepsXRecoiled, stepsYRecoiled;
-//guardar
+    //guardar
     [Header("Stat Settings")]
     [SerializeField] private int _health = 10;
 
@@ -101,7 +103,7 @@ public class PlayerController : MonoBehaviour
     bool isWallSliding;
     bool isWallJumping;
     [Space(5)]
-//guardar
+    //guardar
     [Header("Level Up settings")]
     public int _exp = 0;
 
@@ -117,11 +119,11 @@ public class PlayerController : MonoBehaviour
             expChanged?.Invoke(_exp, expNextLevel);
         }
     }
-    
+
     public int currentLevel = 1; //guardar
-    [SerializeField]public int maxLevel = 10;
-    [SerializeField]public int skillPoints = 0; //guardar
-    [SerializeField]public int expNextLevel = 100;
+    [SerializeField] public int maxLevel = 10;
+    [SerializeField] public int skillPoints = 0; //guardar
+    [SerializeField] public int expNextLevel = 100;
     public bool skillTreeActive = false;
     [Space(5)]
 
@@ -144,12 +146,16 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController Instance;
 
-    public void Awake(){
+    public void Awake()
+    {
 
-        if(Instance != null && Instance != this){
+        if (Instance != null && Instance != this)
+        {
             Destroy(gameObject);
 
-        }else{
+        }
+        else
+        {
             DontDestroyOnLoad(gameObject);
             Instance = this;
         }
@@ -168,7 +174,8 @@ public class PlayerController : MonoBehaviour
         gravity = rb.gravityScale;
     }
 
-    private void OnDrawGizmos(){
+    private void OnDrawGizmos()
+    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(SideAttackTransform.position, SideAttackArea);
         Gizmos.DrawWireCube(UpAttackTransform.position, UpAttackArea);
@@ -181,9 +188,10 @@ public class PlayerController : MonoBehaviour
         GetInputs();
         UpdateJumpVariables();
         CheckLevelUp();
-        if(pState.dashing) return;
+        if (pState.dashing) return;
 
-        if(!isWallJumping){
+        if (!isWallJumping)
+        {
             Recoil();
             Flip();
             Move();
@@ -191,75 +199,92 @@ public class PlayerController : MonoBehaviour
             fallSpeedLimit();
         }
 
-        if(unlockedWallJump){
+        if (unlockedWallJump)
+        {
             WallSlide();
             WallJump();
         }
 
         Attack();
-        if(unlockedDash){
+        if (unlockedDash)
+        {
             StartDash();
         }
 
-        if(skillTreeActive){
+        if (skillTreeActive)
+        {
             upgradeAvaible();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Carga la escena del menú principal
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+            gameObject.active = false;
+        }
+
+
+    }
+
+    public void MenuStart()
     {
-        // Carga la escena del menú principal
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
-        gameObject.active = false;
-    }
-        
-        
+        gameObject.active = true;
     }
 
-    public void MenuStart(){
-        gameObject.active = true ;
-    }
-
-    void GetInputs(){
+    void GetInputs()
+    {
         xAxis = Input.GetAxisRaw("Horizontal");
         yAxis = Input.GetAxisRaw("Vertical");
         attack = Input.GetMouseButtonDown(0);
     }
 
-    private void Flip(){
-        if(xAxis < 0){
+    private void Flip()
+    {
+        if (xAxis < 0)
+        {
             transform.eulerAngles = new Vector2(transform.eulerAngles.x, 180);
             pState.lookingRight = false;
 
-        }else if(xAxis > 0){
+        }
+        else if (xAxis > 0)
+        {
             transform.eulerAngles = new Vector2(transform.eulerAngles.x, 0);
             pState.lookingRight = true;
         }
 
     }
 
-    private void Move(){
+    private void Move()
+    {
         rb.velocity = new Vector2(walkSpeed * xAxis, rb.velocity.y);
         anim.SetBool("Walking", rb.velocity.x != 0 && Grounded());
     }
 
-    void StartDash(){
-        if(Input.GetButtonDown("Dash") && canDash && !dashed){
+    void StartDash()
+    {
+        if (Input.GetButtonDown("Dash") && canDash && !dashed)
+        {
             StartCoroutine(Dash());
             dashed = true;
         }
 
-        if(Grounded()){
+        if (Grounded())
+        {
             dashed = false;
         }
     }
 
-    IEnumerator Dash(){
+    IEnumerator Dash()
+    {
         canDash = false;
         pState.dashing = true;
         anim.SetTrigger("Dashing");
         rb.gravityScale = 0;
-        if(transform.eulerAngles.y == 0){
+        if (transform.eulerAngles.y == 0)
+        {
             rb.velocity = new Vector2(dashSpeed, 0);
-        }else{
+        }
+        else
+        {
             rb.velocity = new Vector2(-dashSpeed, 0);
         }
         yield return new WaitForSeconds(dashTime);
@@ -269,92 +294,123 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
-    void Attack(){
+    void Attack()
+    {
         timeSinceAttack += Time.deltaTime;
-        if(attack && timeSinceAttack >= timeBetweenAttack){
+        if (attack && timeSinceAttack >= timeBetweenAttack)
+        {
             timeSinceAttack = 0;
 
-            if(yAxis == 0 || yAxis < 0 && Grounded()){
+            if (yAxis == 0 || yAxis < 0 && Grounded())
+            {
                 Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
                 anim.SetTrigger("Attacking");
 
-            }else if(yAxis > 0){
+            }
+            else if (yAxis > 0)
+            {
                 Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
                 anim.SetTrigger("UpAttacking");
 
-            }else if(yAxis < 0 && !Grounded()){
+            }
+            else if (yAxis < 0 && !Grounded())
+            {
                 Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
                 anim.SetTrigger("DownAttacking");
             }
         }
     }
 
-    private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float _recoilStrength){
+    private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float _recoilStrength)
+    {
 
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
-        if(objectsToHit.Length > 0){
+        if (objectsToHit.Length > 0)
+        {
             _recoilDir = true;
         }
 
-        for(int i = 0; i < objectsToHit.Length; i++){
-            if(objectsToHit[i].GetComponent<Enemy>() != null){
+        for (int i = 0; i < objectsToHit.Length; i++)
+        {
+            if (objectsToHit[i].GetComponent<Enemy>() != null)
+            {
                 objectsToHit[i].GetComponent<Enemy>().EnemyHit(damage, (transform.position - objectsToHit[i].transform.position).normalized, _recoilStrength);
             }
         }
 
     }
 
-    void Recoil(){
-        if(pState.recoilingX){
-            if(pState.lookingRight){
+    void Recoil()
+    {
+        if (pState.recoilingX)
+        {
+            if (pState.lookingRight)
+            {
                 rb.velocity = new Vector2(-recoilXSpeed, 0);
 
-            }else{
+            }
+            else
+            {
                 rb.velocity = new Vector2(recoilXSpeed, 0);
             }
         }
 
-        if(pState.recoilingY){
+        if (pState.recoilingY)
+        {
             rb.gravityScale = 0;
-            if(yAxis < 0){
+            if (yAxis < 0)
+            {
                 rb.velocity = new Vector2(rb.velocity.x, recoilYSpeed);
 
-            }else{
+            }
+            else
+            {
                 rb.velocity = new Vector2(rb.velocity.x, -recoilYSpeed);
             }
             airJumpCounter = 0;
 
-        }else{
+        }
+        else
+        {
             rb.gravityScale = gravity;
         }
 
         //Stop recoil X
-        if(pState.recoilingX && stepsXRecoiled < recoilXSteps){
+        if (pState.recoilingX && stepsXRecoiled < recoilXSteps)
+        {
             stepsXRecoiled++;
 
-        }else{
+        }
+        else
+        {
             StopRecoilX();
         }
 
         //Stop recoil Y
-        if(pState.recoilingY && stepsYRecoiled < recoilYSteps){
+        if (pState.recoilingY && stepsYRecoiled < recoilYSteps)
+        {
             stepsYRecoiled++;
 
-        }else{
+        }
+        else
+        {
             StopRecoilY();
         }
 
-        if(Grounded()){
+        if (Grounded())
+        {
             StopRecoilY();
         }
     }
 
-    void StopRecoilX(){
+    void StopRecoilX()
+    {
         stepsXRecoiled = 0;
         pState.recoilingX = false;
     }
 
-    void StopRecoilY(){
+    void StopRecoilY()
+    {
         stepsYRecoiled = 0;
         pState.recoilingY = false;
     }
@@ -362,7 +418,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         Health -= Mathf.RoundToInt(_damage);
-        if(Health <= 0)
+        if (Health <= 0)
         {
             anim.SetTrigger("Die");
             StartCoroutine("DieMenu");
@@ -389,33 +445,43 @@ public class PlayerController : MonoBehaviour
         Health = Mathf.Clamp(Health, 0, maxHealth);
     }
 
-    public bool Grounded(){
+    public bool Grounded()
+    {
 
-        if(Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround) 
-        || Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround) 
-        || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround)){
+        if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround)
+        || Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround)
+        || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround))
+        {
             return true;
 
-        }else{
+        }
+        else
+        {
             return false;
         }
     }
 
-    void Jump(){
+    void Jump()
+    {
 
-        if(Input.GetButtonUp("Jump") && rb.velocity.y > 0){
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
+        {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             pState.jumping = false;
 
         }
 
-        if(!pState.jumping){
+        if (!pState.jumping)
+        {
 
-            if(jumpBufferCounter > 0 && coyoteTimeCounter > 0){
+            if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
+            {
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce);
                 pState.jumping = true;
 
-            }else if(!Grounded() && airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump")){
+            }
+            else if (!Grounded() && airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump"))
+            {
                 pState.jumping = true;
 
                 airJumpCounter++;
@@ -426,50 +492,65 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Jumping", !Grounded());
     }
 
-    void UpdateJumpVariables(){
-        if(Grounded()){
+    void UpdateJumpVariables()
+    {
+        if (Grounded())
+        {
             pState.jumping = false;
             coyoteTimeCounter = coyoteTime;
             airJumpCounter = 0;
 
-        }else{
+        }
+        else
+        {
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if(Input.GetButtonDown("Jump")){
+        if (Input.GetButtonDown("Jump"))
+        {
             jumpBufferCounter = jumpBufferFrames;
 
-        }else{
+        }
+        else
+        {
             jumpBufferCounter--;
         }
     }
 
-    private bool Walled(){
+    private bool Walled()
+    {
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
 
     }
 
-    void WallSlide(){
-        if(Walled() && !Grounded() && xAxis != 0){
+    void WallSlide()
+    {
+        if (Walled() && !Grounded() && xAxis != 0)
+        {
             isWallSliding = true;
 
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
 
-        }else{
+        }
+        else
+        {
             isWallSliding = false;
         }
     }
 
-    void WallJump(){
+    void WallJump()
+    {
 
-        if(isWallSliding){
+        if (isWallSliding)
+        {
             isWallJumping = false;
             wallJumpingDirection = !pState.lookingRight ? 1 : -1;
 
             CancelInvoke(nameof(StopWallJumping));
         }
 
-        if(Input.GetButtonDown("Jump") && isWallSliding){
+        if (Input.GetButtonDown("Jump") && isWallSliding)
+        {
 
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
@@ -488,18 +569,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void StopWallJumping(){
+    void StopWallJumping()
+    {
         isWallJumping = false;
     }
 
-    void fallSpeedLimit(){
-        if(rb.velocity.y < -maxFallSpeed){
+    void fallSpeedLimit()
+    {
+        if (rb.velocity.y < -maxFallSpeed)
+        {
             rb.velocity = new Vector3(rb.velocity.x, -maxFallSpeed);
         }
     }
 
-    void CheckLevelUp(){
-        if(Exp >= expNextLevel && currentLevel < maxLevel){
+    void CheckLevelUp()
+    {
+        if (Exp >= expNextLevel && currentLevel < maxLevel)
+        {
             currentLevel++;
             Exp -= expNextLevel;
             skillPoints++;
@@ -508,13 +594,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void showSkillTree(){
+    void showSkillTree()
+    {
         skillTreeActive = true;
         Debug.Log("Mejoras activas");
     }
 
-    void upgradeAvaible(){
-        if(Input.GetButtonDown("UpgradeHealth")){
+    void upgradeAvaible()
+    {
+        if (Input.GetButtonDown("UpgradeHealth"))
+        {
             skillTreeActive = false;
             skillPoints--;
             maxHealth += 10;
@@ -522,20 +611,38 @@ public class PlayerController : MonoBehaviour
             Debug.Log(maxHealth);
             Debug.Log("Mejora: Vida");
 
-        }else if(Input.GetButtonDown("UpgradeDamage")){
+        }
+        else if (Input.GetButtonDown("UpgradeDamage"))
+        {
             skillTreeActive = false;
             skillPoints--;
             damage += 1;
             Debug.Log(damage);
             Debug.Log("Mejora: Daño");
 
-        }else if(Input.GetButtonDown("UpgradeMana")){
+        }
+        else if (Input.GetButtonDown("UpgradeMana"))
+        {
             skillTreeActive = false;
             skillPoints--;
             maxMana += 10;
             Mana += 10;
             Debug.Log(maxMana);
             Debug.Log("Mejora: Mana");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "NextLevel")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            respawnPoint = transform.position;
+        }
+        else if (collision.tag == "PreviousLevel")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            respawnPoint = transform.position;
         }
     }
 }

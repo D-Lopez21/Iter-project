@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
 
+    Animator animator;
     private Vector3 respawnPoint;
     public UnityEvent<int, int> healthChanged;
     public UnityEvent<int, int> manaChanged;
@@ -182,7 +184,9 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(DownAttackTransform.position, DownAttackArea);
     }
 
-    // Update is called once per frame
+    public ProjectileBehaviour projectilePrefab;
+    public Transform launchOffset;
+
     void Update()
     {
         GetInputs();
@@ -222,7 +226,10 @@ public class PlayerController : MonoBehaviour
             gameObject.active = false;
         }
 
-
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
+        }
     }
 
     public void MenuStart()
@@ -645,4 +652,14 @@ public class PlayerController : MonoBehaviour
             respawnPoint = transform.position;
         }
     }
+
+    public void OnRangedAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            animator.SetTrigger(AnimationStrings.rangedAttackTrigger);
+        }
+    }
+
+
 }

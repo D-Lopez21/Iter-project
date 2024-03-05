@@ -62,7 +62,7 @@ public class HealthBar : MonoBehaviour
             if(newHealth <= 0)
     {
         // Aquí puedes cargar la escena de "Game Over" o el menú principal
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Death Menu");
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("Death Menu");
     }
         
     }

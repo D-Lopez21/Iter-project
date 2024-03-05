@@ -362,7 +362,18 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         Health -= Mathf.RoundToInt(_damage);
+        if(Health <= 0)
+        {
+            anim.SetTrigger("Die");
+            StartCoroutine("DieMenu");
+        }
         StartCoroutine(StopTakingDamage());
+    }
+
+    IEnumerator DieMenu()
+    {
+        yield return new WaitForSeconds(1f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Death Menu");
     }
 
     IEnumerator StopTakingDamage()

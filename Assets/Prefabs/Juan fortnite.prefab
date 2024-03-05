@@ -184,7 +184,6 @@ MonoBehaviour:
   playerXR: 33
   playerYU: -60
   playerYD: -70
-  stunDuration: 5
 --- !u!61 &8153421620203124390
 BoxCollider2D:
   m_ObjectHideFlags: 0

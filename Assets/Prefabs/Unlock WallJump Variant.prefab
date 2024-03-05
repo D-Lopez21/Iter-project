@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1338972030557377854
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 925962045797029354, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_text
+      value: Salto en la pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088714566723239134, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 299.0577
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088714566723239134, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088714566723239134, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186807738306810966, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_text
+      value: Sigue moviendote hacia una pared para deslizarte, y poder saltar desde
+        ella
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 130.40865
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -65.55535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022765074689257912, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7579849805058056462, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_Name
+      value: Unlock WallJump Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702585473981127361, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7579849805058056462, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1777582196379920747}
+  m_SourcePrefab: {fileID: 100100000, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+--- !u!1 &8678981126765989887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7702585473981127361, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+  m_PrefabInstance: {fileID: 1338972030557377854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8909794393070957616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7579849805058056462, guid: 0a55aa5f810ebb540b370c68dd0cad06, type: 3}
+  m_PrefabInstance: {fileID: 1338972030557377854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1777582196379920747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8909794393070957616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2c821e0fd120d4db1dcc12383b338d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles: {fileID: 5012981489128034378, guid: c7fb5a62f21a15b41bce0dc3a147397d, type: 3}
+  canvasUI: {fileID: 8678981126765989887}

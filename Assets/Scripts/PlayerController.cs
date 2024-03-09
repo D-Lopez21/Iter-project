@@ -126,7 +126,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public int maxLevel = 10;
     [SerializeField] public int skillPoints = 0; //guardar
     [SerializeField] public int expNextLevel = 100;
-    public bool skillTreeActive = false;
     [Space(5)]
 
     [HideInInspector] public PlayerStateList pState;
@@ -145,6 +144,9 @@ public class PlayerController : MonoBehaviour
     public bool unlockedDoubleJump;
     public bool unlockedWallJump;
 
+    //Interface variables
+    public bool skillTreeActive = false;
+    public bool InventoryActive = false;
 
     public static PlayerController Instance;
 

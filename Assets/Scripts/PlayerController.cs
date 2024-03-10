@@ -129,9 +129,9 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
 
     [HideInInspector] public PlayerStateList pState;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private float xAxis, yAxis;
-    private float gravity;
+    public float gravity;
     Animator anim;
 
     public BoxCollider2D colli;
@@ -146,7 +146,6 @@ public class PlayerController : MonoBehaviour
 
     //Interface variables
     public bool skillTreeActive = false;
-    public bool InventoryActive = false;
 
     public static PlayerController Instance;
 
@@ -191,46 +190,48 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        GetInputs();
-        UpdateJumpVariables();
-        CheckLevelUp();
-        if (pState.dashing) return;
+        if(!pState.inventoryActive){
+            GetInputs();
+            UpdateJumpVariables();
+            CheckLevelUp();
+            if (pState.dashing) return;
 
-        if (!isWallJumping)
-        {
-            Recoil();
-            Flip();
-            Move();
-            Jump();
-            fallSpeedLimit();
-        }
+            if (!isWallJumping)
+            {
+                Recoil();
+                Flip();
+                Move();
+                Jump();
+                fallSpeedLimit();
+            }
 
-        if (unlockedWallJump)
-        {
-            WallSlide();
-            WallJump();
-        }
+            if (unlockedWallJump)
+            {
+                WallSlide();
+                WallJump();
+            }
 
-        Attack();
-        if (unlockedDash)
-        {
-            StartDash();
-        }
+            Attack();
+            if (unlockedDash)
+            {
+                StartDash();
+            }
 
-        if (skillTreeActive)
-        {
-            upgradeAvaible();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            // Carga la escena del menú principal
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
-            gameObject.active = false;
-        }
+            if (skillTreeActive)
+            {
+                upgradeAvaible();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                // Carga la escena del menú principal
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+                gameObject.active = false;
+            }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
+            }
         }
     }
 

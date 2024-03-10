@@ -1,15 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
+    [Header("Button Images")]
+    [SerializeField] Image basicSword;
+    [SerializeField] Image longSword;
+    [SerializeField] Image staff;
+    [SerializeField] Image bow;
+    [SerializeField] Image gauntlet;
+    [SerializeField] Image spellBook;
+    [Space(5)]
+
+    [Header("Inventory Text")]
+    [SerializeField] TMP_Text weaponName;
+    [SerializeField] TMP_Text weaponDescription;
+    [SerializeField] TMP_Text arrowCount;
+    [SerializeField] TMP_Text healthCount;
+    [SerializeField] TMP_Text manaCount;
+    [Space(5)]
 
     CanvasGroup canvasGroup;
     private bool activeTransition = false;
+
+    public static InventoryController Instance;
+
+    PlayerController playerObj;
+
+    public void awake(){
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        playerObj = PlayerController.Instance;
+        Debug.Log(playerObj);
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
@@ -21,12 +59,16 @@ public class InventoryController : MonoBehaviour
 
     void checkInventory(){
         if(Input.GetButtonDown("Inventory") && !activeTransition){
-            if(!PlayerController.Instance.InventoryActive){
-                PlayerController.Instance.InventoryActive = true;
+            if(!playerObj.pState.inventoryActive){
+                playerObj.pState.inventoryActive = true;
+                playerObj.rb.velocity = new Vector2(0, 0);
+                playerObj.rb.gravityScale = 0;
+
                 StartCoroutine(FadeIn(0.2f));
 
             }else{
-                PlayerController.Instance.InventoryActive = false;
+                playerObj.pState.inventoryActive = false;
+                playerObj.rb.gravityScale = playerObj.gravity;
                 StartCoroutine(FadeOut(0.2f));
             }
 

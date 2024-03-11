@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class InventoryController : MonoBehaviour
 {
     [Header("Button Images")]
-    [SerializeField] Image basicSword;
-    [SerializeField] Image longSword;
-    [SerializeField] Image staff;
-    [SerializeField] Image bow;
-    [SerializeField] Image gauntlet;
-    [SerializeField] Image spellBook;
+    [SerializeField] public Image basicSword;
+    [SerializeField] public Image longSword;
+    [SerializeField] public Image staff;
+    [SerializeField] public Image bow;
+    [SerializeField] public Image gauntlet;
+    [SerializeField] public Image spellBook;
     [Space(5)]
 
     [Header("Inventory Text")]
@@ -49,6 +49,7 @@ public class InventoryController : MonoBehaviour
         playerObj = PlayerController.Instance;
         Debug.Log(playerObj);
         canvasGroup = GetComponent<CanvasGroup>();
+
     }
 
     // Update is called once per frame
@@ -99,5 +100,33 @@ public class InventoryController : MonoBehaviour
         }
         activeTransition = false;
         yield return null;
+    }
+
+    public void changeWeapon(int weaponNumb, Button weaponButton){
+        
+        if(playerObj.weaponList[weaponNumb]){
+            switch(weaponNumb){
+
+                case 0:
+                    weaponName.text = "Espada";
+                    weaponDescription.text = "Arma basica y confiable";
+                    break;
+
+                case 1:
+                    weaponName.text = "Espada Larga";
+                    weaponDescription.text = "Arma de gran alcance y daño pero ataques lentos";
+                    break;
+
+                default:
+                    weaponName.text = "El chavo";
+                    weaponDescription.text = "Como imprimo un video?";
+                    break;
+
+            }
+
+        }else{
+            weaponName.text = "Bloqueado";
+            weaponDescription.text = "No has encontrado esta arma";
+        }
     }
 }

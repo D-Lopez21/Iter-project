@@ -138,11 +138,21 @@ public class PlayerController : MonoBehaviour
     private bool canDash = true;
     private bool dashed;
 
-
     //Unlock variables
+    [Header("Unlock Settings")]
     public bool unlockedDash;
     public bool unlockedDoubleJump;
     public bool unlockedWallJump;
+    public bool unlockedLong;
+    public bool unlockedStaff;
+    public bool unlockedBow;
+    public bool unlockedGauntlet;
+    public bool unlockedBook;
+    [Space(5)]
+
+    //Weapon variables
+    [SerializeField] public int currentWeapon = 0;
+    public bool[] weaponList;
 
     //Interface variables
     public bool skillTreeActive = false;
@@ -175,6 +185,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         colli = GetComponent<BoxCollider2D>();
         gravity = rb.gravityScale;
+        bool[] weaponList = {true, unlockedLong, unlockedStaff, unlockedBow, unlockedGauntlet, unlockedBook};
     }
 
     private void OnDrawGizmos()

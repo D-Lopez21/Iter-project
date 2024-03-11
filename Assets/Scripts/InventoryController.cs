@@ -6,13 +6,24 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
+    [Header("Buttons")]
+    [SerializeField] public Button bBasic;
+    [SerializeField] public Button bLong;
+    [SerializeField] public Button bStaff;
+    [SerializeField] public Button bBow;
+    [SerializeField] public Button bGauntlet;
+    [SerializeField] public Button bSecret;
+
+    public Button bPrevious;
+    private Button bCurrent;
+
     [Header("Button Images")]
     [SerializeField] public Image basicSword;
     [SerializeField] public Image longSword;
     [SerializeField] public Image staff;
     [SerializeField] public Image bow;
     [SerializeField] public Image gauntlet;
-    [SerializeField] public Image spellBook;
+    [SerializeField] public Image secret;
     [Space(5)]
 
     [Header("Inventory Text")]
@@ -47,7 +58,6 @@ public class InventoryController : MonoBehaviour
     void Start()
     {
         playerObj = PlayerController.Instance;
-        Debug.Log(playerObj);
         canvasGroup = GetComponent<CanvasGroup>();
 
     }
@@ -102,31 +112,55 @@ public class InventoryController : MonoBehaviour
         yield return null;
     }
 
-    public void changeWeapon(int weaponNumb, Button weaponButton){
-        
-        if(playerObj.weaponList[weaponNumb]){
-            switch(weaponNumb){
+    public void changeUIWeapon(int _weaponNumb){
+        if(playerObj.weaponList[_weaponNumb]){
+            switch(_weaponNumb){
 
                 case 0:
                     weaponName.text = "Espada";
                     weaponDescription.text = "Arma basica y confiable";
+                    bCurrent = bBasic;
                     break;
 
                 case 1:
                     weaponName.text = "Espada Larga";
                     weaponDescription.text = "Arma de gran alcance y daño pero ataques lentos";
+                    bCurrent = bLong;
                     break;
 
-                default:
-                    weaponName.text = "El chavo";
-                    weaponDescription.text = "Como imprimo un video?";
+                case 2:
+                    weaponName.text = "Baston";
+                    weaponDescription.text = "Gran alcance y proyectiles, pero poco daño";
+                    bCurrent = bStaff;
+                    break;
+
+                case 3:
+                    weaponName.text = "Arco";
+                    weaponDescription.text = "Dispara proyectiles, pero utiliza municion";
+                    bCurrent = bBow;
+                    break;
+
+                case 4:
+                    weaponName.text = "Guantes";
+                    weaponDescription.text = "Gran daño y velocidad pero poco alcance";
+                    bCurrent = bGauntlet;
+                    break;
+
+                case 5:
+                    weaponName.text = "Secreto";
+                    weaponDescription.text = "Goku?";
+                    bCurrent = bSecret;
                     break;
 
             }
+            bPrevious.GetComponent<Image>().color = Color.gray;
+            bCurrent.GetComponent<Image>().color = Color.cyan;
+            bPrevious = bCurrent;
 
         }else{
             weaponName.text = "Bloqueado";
             weaponDescription.text = "No has encontrado esta arma";
         }
     }
+
 }

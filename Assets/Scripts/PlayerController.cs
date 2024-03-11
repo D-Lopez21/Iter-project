@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask attackableLayer;
     [SerializeField] public float damage;
     bool attack = false;
-    float timeBetweenAttack, timeSinceAttack;
+    public float timeBetweenAttack;
+    float timeSinceAttack;
     [Space(5)]
 
     [Header("Recoil Settings")]
@@ -147,7 +148,7 @@ public class PlayerController : MonoBehaviour
     public bool unlockedStaff;
     public bool unlockedBow;
     public bool unlockedGauntlet;
-    public bool unlockedBook;
+    public bool unlockedSecret;
     [Space(5)]
 
     //Weapon variables
@@ -174,6 +175,14 @@ public class PlayerController : MonoBehaviour
         }
 
         Health = maxHealth;
+        weaponList = new bool[6];
+        weaponList[0] = true;
+        weaponList[1] = unlockedLong;
+        weaponList[2] = unlockedStaff;
+        weaponList[3] = unlockedBow;
+        weaponList[4] = unlockedGauntlet;
+        weaponList[5] = unlockedSecret;
+
     }
 
 
@@ -185,7 +194,6 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         colli = GetComponent<BoxCollider2D>();
         gravity = rb.gravityScale;
-        bool[] weaponList = {true, unlockedLong, unlockedStaff, unlockedBow, unlockedGauntlet, unlockedBook};
     }
 
     private void OnDrawGizmos()

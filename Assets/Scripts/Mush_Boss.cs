@@ -27,7 +27,26 @@ public class Mush_Boss : Mushroom
                 }else{
                     transform.localScale = new Vector2(2, transform.localScale.y);
                 }
+
+                //if(Random.Range(0,2)==1)
+                //{
+                //    ChangeState(EnemyStates.Mush_run);
+                //}
                 break;
+
+            case EnemyStates.Mush_run:
+                Run();
+                ChangeState(EnemyStates.Mush_walk);
+                break;
+        }
+    }
+
+    private void Run()
+    {
+        float point = PlayerController.Instance.transform.position.x;
+        while(transform.position.x != point)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(point, transform.position.y), (speed + 3) * Time.deltaTime);
         }
     }
 
@@ -49,6 +68,7 @@ public class Mush_Boss : Mushroom
     protected override void ChangeCurrentAnimation()
     {
         base.ChangeCurrentAnimation();
+        anim.SetBool("Run", GetCurrentEnemyState == EnemyStates.Mush_run);
     }
 
     private void DropItem()

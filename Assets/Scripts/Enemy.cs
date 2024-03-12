@@ -29,6 +29,9 @@ public class Enemy : MonoBehaviour
         Mush_hit,
         Mush_die,
 
+        //Mush Boss
+        Mush_run,
+
         //Eye
         Eye_idle,
         Eye_chase,

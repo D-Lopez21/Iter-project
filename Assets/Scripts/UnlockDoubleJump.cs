@@ -26,6 +26,7 @@ public class UnlockDoubleJump : MonoBehaviour
     }
 
     IEnumerator ShowUI(){
+        PlayerController.Instance.pState.activeUI = true;
         GameObject _particles = Instantiate(particles, transform.position, Quaternion.identity);
         Destroy(_particles, 0.5f);
         yield return new WaitForSeconds(0.1f);
@@ -47,6 +48,7 @@ public class UnlockDoubleJump : MonoBehaviour
         PlayerController.Instance.unlockedDoubleJump = true;
         PlayerController.Instance.maxAirJumps += 1;
         canvasUI.SetActive(false);
+        PlayerController.Instance.pState.activeUI = false;
         Destroy(gameObject);
 
     }

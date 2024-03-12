@@ -27,6 +27,7 @@ public class UnlockDash : MonoBehaviour
     }
 
     IEnumerator ShowUI(){
+        PlayerController.Instance.pState.activeUI = true;
         GameObject _particles = Instantiate(particles, transform.position, Quaternion.identity);
         Destroy(_particles, 0.5f);
         yield return new WaitForSeconds(0.1f);
@@ -46,6 +47,7 @@ public class UnlockDash : MonoBehaviour
         
         PlayerController.Instance.unlockedDash = true;
         canvasUI.SetActive(false);
+        PlayerController.Instance.pState.activeUI = false;
         Destroy(gameObject);
 
     }

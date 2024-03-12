@@ -41,7 +41,7 @@ public class InventoryController : MonoBehaviour
 
     PlayerController playerObj;
 
-    public void awake(){
+    public void Awake(){
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -49,7 +49,6 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(gameObject);
             Instance = this;
         }
     }
@@ -69,7 +68,7 @@ public class InventoryController : MonoBehaviour
     }
 
     void checkInventory(){
-        if(Input.GetButtonDown("Inventory") && !activeTransition){
+        if(Input.GetButtonDown("Inventory") && !activeTransition && !playerObj.pState.activeUI){
             if(!playerObj.pState.inventoryActive){
                 playerObj.pState.inventoryActive = true;
                 playerObj.rb.velocity = new Vector2(0, 0);

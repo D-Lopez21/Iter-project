@@ -12,7 +12,7 @@ public class UnlockSecretWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(PlayerController.Instance.unlockedLong){
+        if(PlayerController.Instance.unlockedSecret){
             Destroy(gameObject);
         }
         canvasGroup = canvasUI.GetComponent<CanvasGroup>();

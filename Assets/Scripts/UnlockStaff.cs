@@ -12,7 +12,7 @@ public class UnlockStaff : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(PlayerController.Instance.unlockedLong){
+        if(PlayerController.Instance.unlockedStaff){
             Destroy(gameObject);
         }
         canvasGroup = canvasUI.GetComponent<CanvasGroup>();

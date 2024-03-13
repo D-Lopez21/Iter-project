@@ -12,7 +12,7 @@ public class UnlockGauntlet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(PlayerController.Instance.unlockedLong){
+        if(PlayerController.Instance.unlockedGauntlet){
             Destroy(gameObject);
         }
         canvasGroup = canvasUI.GetComponent<CanvasGroup>();

@@ -34,6 +34,9 @@ public class InventoryController : MonoBehaviour
     [SerializeField] TMP_Text manaCount;
     [Space(5)]
 
+    int previousWeapon;
+    int nextWeapon;
+
     CanvasGroup canvasGroup;
     private bool activeTransition = false;
 
@@ -58,7 +61,8 @@ public class InventoryController : MonoBehaviour
     {
         playerObj = PlayerController.Instance;
         canvasGroup = GetComponent<CanvasGroup>();
-
+        previousWeapon = 0;
+        nextWeapon = 0;
     }
 
     // Update is called once per frame
@@ -79,6 +83,10 @@ public class InventoryController : MonoBehaviour
             }else{
                 playerObj.pState.inventoryActive = false;
                 playerObj.rb.gravityScale = playerObj.gravity;
+                if(nextWeapon != previousWeapon){
+                    previousWeapon = nextWeapon;
+                    playerObj.ChangeWeapon(nextWeapon);
+                }
                 StartCoroutine(FadeOut(0.2f));
             }
 
@@ -119,36 +127,42 @@ public class InventoryController : MonoBehaviour
                     weaponName.text = "Espada";
                     weaponDescription.text = "Arma basica y confiable";
                     bCurrent = bBasic;
+                    nextWeapon = 0;
                     break;
 
                 case 1:
                     weaponName.text = "Espada Larga";
                     weaponDescription.text = "Arma de gran alcance y daño pero ataques lentos";
                     bCurrent = bLong;
+                    nextWeapon = 1;
                     break;
 
                 case 2:
                     weaponName.text = "Baston";
                     weaponDescription.text = "Gran alcance y proyectiles, pero poco daño";
                     bCurrent = bStaff;
+                    nextWeapon = 2;
                     break;
 
                 case 3:
                     weaponName.text = "Arco";
                     weaponDescription.text = "Dispara proyectiles, pero utiliza municion";
                     bCurrent = bBow;
+                    nextWeapon = 3;
                     break;
 
                 case 4:
                     weaponName.text = "Guantes";
                     weaponDescription.text = "Gran daño y velocidad pero poco alcance";
                     bCurrent = bGauntlet;
+                    nextWeapon = 4;
                     break;
 
                 case 5:
                     weaponName.text = "Secreto";
                     weaponDescription.text = "Goku?";
                     bCurrent = bSecret;
+                    nextWeapon = 5;
                     break;
 
             }

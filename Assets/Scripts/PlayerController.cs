@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 SideAttackArea, UpAttackArea, DownAttackArea;
     [SerializeField] LayerMask attackableLayer;
     [SerializeField] public float damage;
+    [SerializeField] public float damageMultiplier;
     bool attack = false;
     public float timeBetweenAttack;
     float timeSinceAttack;
@@ -363,7 +364,7 @@ public class PlayerController : MonoBehaviour
         {
             if (objectsToHit[i].GetComponent<Enemy>() != null)
             {
-                objectsToHit[i].GetComponent<Enemy>().EnemyHit(damage, (transform.position - objectsToHit[i].transform.position).normalized, _recoilStrength);
+                objectsToHit[i].GetComponent<Enemy>().EnemyHit(damage * damageMultiplier, (transform.position - objectsToHit[i].transform.position).normalized, _recoilStrength);
             }
         }
 
@@ -680,6 +681,92 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.rangedAttackTrigger);
+        }
+    }
+
+    public void ChangeWeapon(int _weaponNum){
+        Debug.Log(_weaponNum);
+        switch(_weaponNum){
+
+            case 0:
+                currentWeapon = 0;
+
+                SideAttackTransform.position = new Vector2(2.75f, -0.7f);
+                UpAttackTransform.position = new Vector2(0, 2.5f);
+                DownAttackTransform.position = new Vector2(0, -3.45f);
+
+                SideAttackArea = new Vector2(4.5f, 3.5f);
+                UpAttackArea = new Vector2(3.5f, 4.5f);
+                DownAttackArea = new Vector2(3.5f, 4.5f);
+
+                timeBetweenAttack = 0.4f;
+                damageMultiplier = 1f;
+                break;
+
+            case 1:
+                Debug.Log("Hola");
+                currentWeapon = 1;
+
+                SideAttackArea = new Vector2(4f, 7.5f);
+                UpAttackArea = new Vector2(7.5f, 4f);
+                DownAttackArea = new Vector2(7.5f, 4f);
+
+                SideAttackTransform.position = new Vector2(transform.position.x + 4.7f, transform.position.y + -0.7f);
+                UpAttackTransform.position = new Vector2(transform.position.x + 0, transform.position.y + 4.85f);
+                DownAttackTransform.position = new Vector2(transform.position.x + 0, transform.position.y + -5.3f);
+
+                timeBetweenAttack = 1f;
+                damageMultiplier = 1.7f;
+                break;
+
+            case 2:
+                currentWeapon = 2;
+
+                SideAttackTransform.position = new Vector2(3.25f, -0.7f);
+                UpAttackTransform.position = new Vector2(0, 3.3f);
+                DownAttackTransform.position = new Vector2(0, -3.95f);
+
+                SideAttackArea = new Vector2(4.5f, 5.5f);
+                UpAttackArea = new Vector2(5.5f, 4.5f);
+                DownAttackArea = new Vector2(5.5f, 4.5f);
+
+                timeBetweenAttack = 0.7f;
+                damageMultiplier = 1.3f;
+                break;
+
+            case 3:
+                currentWeapon = 3;
+
+                SideAttackTransform.position = new Vector2(0f, -0.372f);
+                UpAttackTransform.position = new Vector2(0, 1.7f);
+                DownAttackTransform.position = new Vector2(0, -2.4f);
+
+                SideAttackArea = new Vector2(1.5f, 2.5f);
+                UpAttackArea = new Vector2(2.5f, 1.5f);
+                DownAttackArea = new Vector2(2.5f, 1.5f);
+
+                timeBetweenAttack = 0.05f;
+                damageMultiplier = 1.4f;
+                break;
+
+            case 4:
+                currentWeapon = 4;
+                break;
+            
+            case 5:
+                currentWeapon = 5;
+
+                SideAttackTransform.position = new Vector2(3.75f, -0.5f);
+                UpAttackTransform.position = new Vector2(0, 3.8f);
+                DownAttackTransform.position = new Vector2(0, -4.5f);
+
+                SideAttackArea = new Vector2(5.5f, 4.5f);
+                UpAttackArea = new Vector2(4.5f, 5.5f);
+                DownAttackArea = new Vector2(4.5f, 5.5f);
+
+                timeBetweenAttack = 0.3f;
+                damageMultiplier = 1.2f;
+                break;
         }
     }
 

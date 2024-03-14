@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
         MushB_walk,
         MushB_hit,
         MushB_die,
+        MushB_Attack,
 
         //Eye
         Eye_idle,

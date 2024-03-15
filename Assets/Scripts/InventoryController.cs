@@ -86,6 +86,7 @@ public class InventoryController : MonoBehaviour
                 if(nextWeapon != previousWeapon){
                     previousWeapon = nextWeapon;
                     playerObj.ChangeWeapon(nextWeapon);
+                    WeaponChangeAnimation.Instance.ActivateAnimation(nextWeapon);
                 }
                 StartCoroutine(FadeOut(0.2f));
             }

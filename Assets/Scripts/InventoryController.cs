@@ -78,6 +78,10 @@ public class InventoryController : MonoBehaviour
                 playerObj.rb.velocity = new Vector2(0, 0);
                 playerObj.rb.gravityScale = 0;
 
+                arrowCount.text = "" + playerObj.arrowAmount;
+                healthCount.text = "" + playerObj.healthPotions;
+                manaCount.text = "" + playerObj.manaPotions;
+
                 StartCoroutine(FadeIn(0.2f));
 
             }else{
@@ -175,6 +179,47 @@ public class InventoryController : MonoBehaviour
             weaponName.text = "Bloqueado";
             weaponDescription.text = "No has encontrado esta arma";
         }
+    }
+
+    public void usePotion(int _potion){
+
+        switch(_potion){
+            case 1:
+                if(playerObj.healthPotions > 0){
+                    if(playerObj.Health < playerObj.maxHealth){
+                        playerObj.healthPotions--;
+                        
+                        if((playerObj.Health + 10) > playerObj.maxHealth){
+                            playerObj.Health = playerObj.maxHealth;
+
+                        }else{
+                            playerObj.Health += 10;
+                        }
+
+                        healthCount.text = "" + playerObj.healthPotions;
+                    }
+                }
+                break;
+
+            case 2:
+                if(playerObj.Mana < playerObj.maxMana){
+                    if(playerObj.manaPotions > 0){
+
+                    playerObj.manaPotions--;
+                    
+                    if((playerObj.Mana + 10) > playerObj.maxMana){
+                        playerObj.Mana = playerObj.maxMana;
+
+                    }else{
+                        playerObj.Mana += 10;
+                    }
+
+                    manaCount.text = "" + playerObj.manaPotions;
+                    }
+                }
+                break;
+        }
+
     }
 
 }

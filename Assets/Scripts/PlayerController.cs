@@ -154,6 +154,9 @@ public class PlayerController : MonoBehaviour
 
     //Weapon variables
     [SerializeField] public int currentWeapon = 0;
+    [SerializeField] public int arrowAmount = 0;
+    [SerializeField] public int healthPotions = 0;
+    [SerializeField] public int manaPotions = 0;
     public bool[] weaponList;
 
     //Interface variables
@@ -327,26 +330,38 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         timeSinceAttack += Time.deltaTime;
+
         if ((attack || Input.GetKeyDown(KeyCode.J)) && timeSinceAttack >= timeBetweenAttack)
         {
             timeSinceAttack = 0;
 
-            if (yAxis == 0 || yAxis < 0 && Grounded())
-            {
-                Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
-                anim.SetTrigger("Attacking");
+            if(currentWeapon == 3){
 
-            }
-            else if (yAxis > 0)
-            {
-                Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
-                anim.SetTrigger("UpAttacking");
+                if(arrowAmount > 0){
+                    arrowAmount--;
+                    anim.SetTrigger("Attacking");
+                }
 
-            }
-            else if (yAxis < 0 && !Grounded())
-            {
-                Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
-                anim.SetTrigger("DownAttacking");
+            }else{
+
+                if (yAxis == 0 || yAxis < 0 && Grounded())
+                {
+                    Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
+                    anim.SetTrigger("Attacking");
+
+                }
+                else if (yAxis > 0)
+                {
+                    Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
+                    anim.SetTrigger("UpAttacking");
+
+                }
+                else if (yAxis < 0 && !Grounded())
+                {
+                    Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
+                    anim.SetTrigger("DownAttacking");
+                }
+            
             }
         }
     }

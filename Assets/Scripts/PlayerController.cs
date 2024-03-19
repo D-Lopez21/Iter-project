@@ -339,7 +339,8 @@ public class PlayerController : MonoBehaviour
 
                 if(arrowAmount > 0){
                     arrowAmount--;
-                    anim.SetTrigger("Attacking");
+                    anim.SetTrigger("rangedattack");
+                    Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
                 }
 
             }else{

@@ -5,6 +5,13 @@ using UnityEngine;
 public class ProjectileBehaviour : MonoBehaviour
 {
     public float Speed = 9.5f;
+    public float damage;
+    public float damageMultiplier;
+
+    private void Start(){
+        damage = PlayerController.Instance.damage;
+        damageMultiplier = PlayerController.Instance.damageMultiplier;
+    }
 
     private void Update()
     {
@@ -15,12 +22,11 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if(collision.gameObject.layer != 6){
             if(collision.gameObject.layer == 8){
-                collision.gameObject.GetComponent<Enemy>().EnemyHit((PlayerController.Instance.damage * PlayerController.Instance.damageMultiplier), (PlayerController.Instance.transform.position - collision.gameObject.transform.position).normalized, 10);
+                collision.gameObject.GetComponent<Enemy>().EnemyHit((damage * damageMultiplier), (PlayerController.Instance.transform.position - collision.gameObject.transform.position).normalized, 10);
             }
 
             Destroy(gameObject);
         }
-
 
     }
 

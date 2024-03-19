@@ -159,6 +159,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public int manaPotions = 0;
     public bool[] weaponList;
 
+    //Special variables
+    [Header("Special Attack Settings")]
+    public GameObject swordWave;
+    public GameObject spiritSlash;
+    public GameObject spellSpam;
+    public GameObject tripleArrow;
+    public GameObject goku;
+    public GameObject riderKick;
+    public GameObject secretSpecial;
+
     //Interface variables
     public bool skillTreeActive = false;
 
@@ -235,6 +245,7 @@ public class PlayerController : MonoBehaviour
             }
 
             Attack();
+            SpecialAttack();
             if (unlockedDash)
             {
                 StartDash();
@@ -798,5 +809,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void SpecialAttack(){
+        if(Input.GetKeyDown(KeyCode.K)){
+            switch(currentWeapon){
+
+                case 0:
+                    if(Mana >= 5){
+                        Instantiate(swordWave, launchOffset.position, transform.rotation);
+                        anim.SetTrigger("Attacking");
+                        Mana -= 5;
+                    }
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    break;
+                
+                case 4:
+                    break;
+
+                case 5:
+                    break;
+
+            }
+        }
+    }
 
 }

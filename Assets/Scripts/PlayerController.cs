@@ -777,6 +777,8 @@ public class PlayerController : MonoBehaviour
             //Bow
             case 3:
                 currentWeapon = 3;
+                damageMultiplier = 1.1f;
+                timeBetweenAttack = 0.2f;
                 break;
 
             //Gauntlet

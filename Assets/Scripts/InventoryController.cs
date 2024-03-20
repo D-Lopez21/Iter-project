@@ -29,6 +29,11 @@ public class InventoryController : MonoBehaviour
     [Header("Inventory Text")]
     [SerializeField] TMP_Text weaponName;
     [SerializeField] TMP_Text weaponDescription;
+    [SerializeField] TMP_Text weaponMultiplier;
+    [SerializeField] TMP_Text weaponSpeed;
+    [SerializeField] TMP_Text weaponSpecial;
+    [SerializeField] TMP_Text weaponSpecialInfo;
+    [SerializeField] TMP_Text weaponSpecialCost;
     [SerializeField] TMP_Text arrowCount;
     [SerializeField] TMP_Text healthCount;
     [SerializeField] TMP_Text manaCount;
@@ -131,6 +136,11 @@ public class InventoryController : MonoBehaviour
                 case 0:
                     weaponName.text = "Espada";
                     weaponDescription.text = "Arma basica y confiable";
+                    weaponMultiplier.text = "Daño: 1x";
+                    weaponSpeed.text = "Velocidad: 0.4s";
+                    weaponSpecial.text = "Especial: Corte Volador";
+                    weaponSpecialInfo.text = "Proyectil que atravieza enemigos";
+                    weaponSpecialCost.text = "5MP";
                     bCurrent = bBasic;
                     nextWeapon = 0;
                     break;
@@ -138,6 +148,11 @@ public class InventoryController : MonoBehaviour
                 case 1:
                     weaponName.text = "Espada Larga";
                     weaponDescription.text = "Arma de gran alcance y daño pero ataques lentos";
+                    weaponMultiplier.text = "Daño: 1.7x";
+                    weaponSpeed.text = "Velocidad: 1s";
+                    weaponSpecial.text = "Especial: Rafaga Instantanea";
+                    weaponSpecialInfo.text = "3 ataques en una area";
+                    weaponSpecialCost.text = "10MP";
                     bCurrent = bLong;
                     nextWeapon = 1;
                     break;
@@ -145,6 +160,11 @@ public class InventoryController : MonoBehaviour
                 case 2:
                     weaponName.text = "Baston";
                     weaponDescription.text = "Gran alcance y proyectiles, pero poco daño";
+                    weaponMultiplier.text = "Daño: 1.3x";
+                    weaponSpeed.text = "Velocidad: 0.7s";
+                    weaponSpecial.text = "Especial: Tormenta de Hechizos";
+                    weaponSpecialInfo.text = "3 proyectiles aleatorios";
+                    weaponSpecialCost.text = "2MP";
                     bCurrent = bStaff;
                     nextWeapon = 2;
                     break;
@@ -152,6 +172,11 @@ public class InventoryController : MonoBehaviour
                 case 3:
                     weaponName.text = "Arco";
                     weaponDescription.text = "Dispara proyectiles, pero utiliza municion";
+                    weaponMultiplier.text = "Daño: 1.1x";
+                    weaponSpeed.text = "Velocidad: 0.2s";
+                    weaponSpecial.text = "Especial: Triple flecha";
+                    weaponSpecialInfo.text = "Dispara 3 flechas por el coste de 1";
+                    weaponSpecialCost.text = "3MP";
                     bCurrent = bBow;
                     nextWeapon = 3;
                     break;
@@ -159,6 +184,11 @@ public class InventoryController : MonoBehaviour
                 case 4:
                     weaponName.text = "Guantes";
                     weaponDescription.text = "Gran daño y velocidad pero poco alcance";
+                    weaponMultiplier.text = "Daño: 1.4x";
+                    weaponSpeed.text = "Velocidad: 0.05s";
+                    weaponSpecial.text = "Especial: Onda vital / Patada heroica";
+                    weaponSpecialInfo.text = "En el piso: gran rayo, en el aire: poderoso ataque aereo";
+                    weaponSpecialCost.text = "10MP";
                     bCurrent = bGauntlet;
                     nextWeapon = 4;
                     break;
@@ -166,6 +196,11 @@ public class InventoryController : MonoBehaviour
                 case 5:
                     weaponName.text = "Full Bottle Buster";
                     weaponDescription.text = "\"Ya tengo la formula ganadora!\"";
+                    weaponMultiplier.text = "Daño: 1.2x";
+                    weaponSpeed.text = "Velocidad: 0.3s";
+                    weaponSpecial.text = "Especial: Full Match Break";
+                    weaponSpecialInfo.text = "Proyectil cuyo daño aumenta segun el mana";
+                    weaponSpecialCost.text = "10MP min, gasta todo";
                     bCurrent = bSecret;
                     nextWeapon = 5;
                     break;
@@ -178,6 +213,11 @@ public class InventoryController : MonoBehaviour
         }else{
             weaponName.text = "Bloqueado";
             weaponDescription.text = "No has encontrado esta arma";
+            weaponMultiplier.text = "Daño: ?x";
+            weaponSpeed.text = "Velocidad: ?s";
+            weaponSpecial.text = "Especial: ???";
+            weaponSpecialInfo.text = "?????";
+            weaponSpecialCost.text = "?MP";
         }
     }
 

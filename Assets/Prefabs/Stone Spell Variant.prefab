@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4912900855918155597
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1377191173762506548, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_Name
+      value: Stone Spell Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959407998605531887, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_Color.b
+      value: 0.335849
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959407998605531887, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.335849
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959407998605531887, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_Color.r
+      value: 0.335849
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.3175263
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3204494
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0230356
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344055087406992909, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389357561649005253, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4170075716368114989, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1377191173762506548, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8686388482277040931}
+  m_SourcePrefab: {fileID: 100100000, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+--- !u!1 &6283336626695047289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1377191173762506548, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+  m_PrefabInstance: {fileID: 4912900855918155597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8686388482277040931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6283336626695047289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45446dbc0df461048a01ac90b776685d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 6
+  damage: 0
+  damageMultiplier: 0

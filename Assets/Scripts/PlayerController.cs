@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
             CheckLevelUp();
             if (pState.dashing) return;
 
-            if (!isWallJumping)
+            if (!isWallJumping && !pState.specialActive)
             {
                 Recoil();
                 Flip();
@@ -810,7 +810,15 @@ public class PlayerController : MonoBehaviour
     }
 
     void SpecialAttack(){
-        if(Input.GetKeyDown(KeyCode.K)){
+        if(Input.GetKeyDown(KeyCode.K) && timeSinceAttack >= timeBetweenAttack){
+            int offsetDirection;
+            if(pState.lookingRight){
+                offsetDirection = 1;
+
+            }else{
+                offsetDirection = -1;
+            }
+            
             switch(currentWeapon){
 
                 case 0:
@@ -818,19 +826,61 @@ public class PlayerController : MonoBehaviour
                         Instantiate(swordWave, launchOffset.position, transform.rotation);
                         anim.SetTrigger("Attacking");
                         Mana -= 5;
+                        timeSinceAttack = 0;
                     }
                     break;
 
                 case 1:
+                    if(Mana >= 10){
+                        Instantiate(spiritSlash, new Vector3(launchOffset.position.x + (0.5f * offsetDirection), launchOffset.position.y), transform.rotation);
+                        anim.SetTrigger("Attacking");
+                        Mana -= 10;
+                        timeSinceAttack = 0;
+                    }
                     break;
 
                 case 2:
+                    if(Mana >= 2){
+                        Instantiate(spellSpam, launchOffset.position, transform.rotation);
+                        timeSinceAttack = 0;
+                    }
                     break;
 
                 case 3:
+                    if(Mana >= 3 && arrowAmount > 0){
+                        Quaternion tempQua1 = transform.rotation;
+                        Quaternion tempQua2 = transform.rotation;
+
+
+                        tempQua1.eulerAngles = new Vector3(tempQua1.eulerAngles.x, tempQua1.eulerAngles.y, 30f);
+                        tempQua2.eulerAngles = new Vector3(tempQua1.eulerAngles.x, tempQua1.eulerAngles.y, -30f);
+
+                        Instantiate(projectilePrefab, new Vector2 (launchOffset.position.x, launchOffset.position.y + 0.4f), tempQua1);
+                        Instantiate(projectilePrefab, new Vector2 (launchOffset.position.x, launchOffset.position.y - 0.4f), tempQua2);
+                        Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
+
+                        anim.SetTrigger("rangedattack");
+
+                        Mana -= 3;
+                        arrowAmount--;
+                        timeSinceAttack = 0;
+
+                    }
                     break;
                 
                 case 4:
+                    if(Mana >= 10){
+                        if(Grounded()){
+                            Instantiate(goku, new Vector3(launchOffset.position.x + (18f * offsetDirection), launchOffset.position.y), transform.rotation);
+                            StartCoroutine(DeactivateSpecialAttack());
+
+                        }else{
+                            Instantiate(riderKick, new Vector3(transform.position.x + (0.7f * offsetDirection), transform.position.y - 0.8f), transform.rotation, transform);
+                        }
+
+                        Mana -= 10;
+                        timeSinceAttack = 0;
+                    }
                     break;
 
                 case 5:
@@ -838,6 +888,11 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+    }
+
+    IEnumerator DeactivateSpecialAttack(){
+        yield return new WaitForSeconds(0.20f);
+        pState.specialActive = false;
     }
 
 }

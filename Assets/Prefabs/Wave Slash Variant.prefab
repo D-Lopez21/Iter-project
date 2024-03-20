@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 427508981377459268, guid: 5dcb289513deb554b80a1dd148e46cde, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 427508981377459268, guid: 5dcb289513deb554b80a1dd148e46cde, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2115097377116422456, guid: 5dcb289513deb554b80a1dd148e46cde, type: 3}
       propertyPath: Speed
       value: 40
@@ -16,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave Slash Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7486870648564860937, guid: 5dcb289513deb554b80a1dd148e46cde, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 82c05c9305a28594b9ef87d64470376a, type: 3}
     - target: {fileID: 7573941548620946667, guid: 5dcb289513deb554b80a1dd148e46cde, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.8998256
@@ -129,7 +141,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.8418304, y: -0.64671516}
+  m_Offset: {x: 0.7699113, y: -0.55208516}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -140,5 +152,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1293104, y: 2.350997}
+  m_Size: {x: 1.924201, y: 2.161737}
   m_EdgeRadius: 0

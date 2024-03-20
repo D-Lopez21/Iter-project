@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4505143416089163242
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1755914891530142536, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755914891530142536, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285859722842204894, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_Name
+      value: Fire Spell Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102846941595603031, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5031712
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102846941595603031, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.22280228
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.3175263
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3204494
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0230356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407263761331420135, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815276601667366661, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f6a5ad24f5c62774592f0c85e14aa0a2, type: 3}
+    - target: {fileID: 8815276601667366661, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815276601667366661, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.21641757
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815276601667366661, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6102846941595603031, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+    - {fileID: 3008412382967646476, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3285859722842204894, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8389357561649005253}
+    - targetCorrespondingSourceObject: {fileID: 3285859722842204894, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4170075716368114989}
+  m_SourcePrefab: {fileID: 100100000, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+--- !u!1 &1377191173762506548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3285859722842204894, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+  m_PrefabInstance: {fileID: 4505143416089163242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &8389357561649005253
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377191173762506548}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.87, y: -0.55}
+  serializedVersion: 2
+  m_Radius: 0.4
+--- !u!114 &4170075716368114989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377191173762506548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c985ae5af95d2ec4386cffec42e5d328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 30
+  damage: 0
+  damageMultiplier: 0

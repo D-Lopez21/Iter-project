@@ -11,5 +11,6 @@ public class PlayerStateList : MonoBehaviour
     public bool invincible;
     public bool inventoryActive = false;
     public bool activeUI = false;
+    public bool specialActive = false;
     
 }

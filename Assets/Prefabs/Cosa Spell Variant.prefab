@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1311777221269514503
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 71347309671861666, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.92595404
+      objectReference: {fileID: 0}
+    - target: {fileID: 71347309671861666, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.013207495
+      objectReference: {fileID: 0}
+    - target: {fileID: 71347309671861666, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.3175263
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3204494
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0230356
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010992720177895744, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2096867978812351490, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2096867978812351490, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283336626695047289, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_Name
+      value: Cosa Spell Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8686388482277040931, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6283336626695047289, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1747773451804633057}
+  m_SourcePrefab: {fileID: 100100000, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+--- !u!1 &4973868661168923006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6283336626695047289, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+  m_PrefabInstance: {fileID: 1311777221269514503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1747773451804633057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4973868661168923006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8939d378d8db864d9abe7892bd7c9b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 15
+  damage: 0
+  damageMultiplier: 0

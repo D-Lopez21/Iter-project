@@ -17,14 +17,16 @@ public class StoneSpell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.right * Time.deltaTime * Speed;
+        if(!PlayerController.Instance.pState.inventoryActive){
+            transform.position += transform.right * Time.deltaTime * Speed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.layer == 8){
             collider.gameObject.GetComponent<Enemy>().EnemyHit((damage * damageMultiplier), (PlayerController.Instance.transform.position - collider.gameObject.transform.position).normalized, 10);
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 0.1f);
 
         }else if(collider.gameObject.layer == 3){
             Destroy(gameObject);

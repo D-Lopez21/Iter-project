@@ -16,7 +16,9 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.right * Time.deltaTime * Speed;
+        if(!PlayerController.Instance.pState.inventoryActive){
+            transform.position += transform.right * Time.deltaTime * Speed;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

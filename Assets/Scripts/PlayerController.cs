@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask attackableLayer;
     [SerializeField] public float damage;
     [SerializeField] public float damageMultiplier;
+    [SerializeField] GameObject slashEffect;
     bool attack = false;
     public float timeBetweenAttack;
     float timeSinceAttack;
@@ -359,18 +360,21 @@ public class PlayerController : MonoBehaviour
                 if (yAxis == 0 || yAxis < 0 && Grounded())
                 {
                     Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
+                    Instantiate(slashEffect, SideAttackTransform);
                     anim.SetTrigger("Attacking");
 
                 }
                 else if (yAxis > 0)
                 {
                     Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
+                    SlashEffectAtAngle(slashEffect, 90, UpAttackTransform);
                     anim.SetTrigger("UpAttacking");
 
                 }
                 else if (yAxis < 0 && !Grounded())
                 {
                     Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
+                    SlashEffectAtAngle(slashEffect, -90, DownAttackTransform);
                     anim.SetTrigger("DownAttacking");
                 }
             
@@ -842,6 +846,7 @@ public class PlayerController : MonoBehaviour
                 case 2:
                     if(Mana >= 2){
                         Instantiate(spellSpam, launchOffset.position, transform.rotation);
+                        Mana -= 2;
                         timeSinceAttack = 0;
                     }
                     break;
@@ -873,6 +878,7 @@ public class PlayerController : MonoBehaviour
                         if(Grounded()){
                             Instantiate(goku, new Vector3(launchOffset.position.x + (18f * offsetDirection), launchOffset.position.y), transform.rotation);
                             StartCoroutine(DeactivateSpecialAttack());
+                            anim.SetTrigger("Attacking");
 
                         }else{
                             Instantiate(riderKick, new Vector3(transform.position.x + (0.7f * offsetDirection), transform.position.y - 0.8f), transform.rotation, transform);
@@ -884,6 +890,11 @@ public class PlayerController : MonoBehaviour
                     break;
 
                 case 5:
+                    if(Mana >= 10){
+                        Instantiate(secretSpecial, new Vector3(launchOffset.position.x, launchOffset.position.y + 0.7f), transform.rotation);
+                        anim.SetTrigger("Attacking");
+                        timeSinceAttack = 0;
+                    }
                     break;
 
             }
@@ -893,6 +904,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator DeactivateSpecialAttack(){
         yield return new WaitForSeconds(0.20f);
         pState.specialActive = false;
+    }
+
+    void SlashEffectAtAngle(GameObject _slashEffect, int _effectAngle, Transform _attackTransform){
+
+        _slashEffect = Instantiate(_slashEffect, _attackTransform);
+        _slashEffect.transform.eulerAngles = new Vector3(0, 0, _effectAngle);
+        _slashEffect.transform.localScale = new Vector2(_attackTransform.localScale.x, _attackTransform.localScale.y);
     }
 
 }

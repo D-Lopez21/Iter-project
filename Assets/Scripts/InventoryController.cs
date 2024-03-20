@@ -164,8 +164,8 @@ public class InventoryController : MonoBehaviour
                     break;
 
                 case 5:
-                    weaponName.text = "Secreto";
-                    weaponDescription.text = "Goku?";
+                    weaponName.text = "Full Bottle Buster";
+                    weaponDescription.text = "\"Ya tengo la formula ganadora!\"";
                     bCurrent = bSecret;
                     nextWeapon = 5;
                     break;

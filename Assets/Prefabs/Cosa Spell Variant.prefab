@@ -9,12 +9,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 71347309671861666, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 365e9f1a49dc9f4499a8d495e263b440, type: 3}
+    - target: {fileID: 71347309671861666, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
       propertyPath: m_Color.b
-      value: 0.92595404
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 71347309671861666, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
       propertyPath: m_Color.g
-      value: 0.013207495
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 71347309671861666, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
       propertyPath: m_Color.r
@@ -68,9 +72,41 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3716879826000429999, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_Name
+      value: Apoyo emocional
+      objectReference: {fileID: 0}
     - target: {fileID: 6283336626695047289, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
       propertyPath: m_Name
       value: Cosa Spell Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130638670400381423, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130638670400381423, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130638670400381423, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.881
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130638670400381423, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.558
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130638670400381423, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130638670400381423, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130638670400381423, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8686388482277040931, guid: 543fb216f5c2150408e24bd1198f21e5, type: 3}

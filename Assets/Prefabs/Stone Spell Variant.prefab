@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8627528879770473698, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
+      propertyPath: m_Name
+      value: Stone Sprite
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4170075716368114989, guid: b9a272f3cee49804989f792628f2c7b7, type: 3}
     m_RemovedGameObjects: []

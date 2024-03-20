@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Spell Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5277761226486292744, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
+      propertyPath: m_Name
+      value: Fire sprite
+      objectReference: {fileID: 0}
     - target: {fileID: 6102846941595603031, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
       propertyPath: m_Size.y
       value: 1.5031712

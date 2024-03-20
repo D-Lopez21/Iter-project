@@ -19,7 +19,7 @@ public class SpellSpam : MonoBehaviour
     void randomSpell(float _offset){
         float tempRandom;
         tempRandom = Random.Range(0, 10f);
-        if(tempRandom >= 9f){
+        if(tempRandom >= 9.8f){
             Instantiate(nerf, new Vector2(transform.position.x, transform.position.y + _offset), transform.rotation);
 
         }else if(tempRandom >= 5f){

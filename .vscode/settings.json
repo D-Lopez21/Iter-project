@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Iter-project.sln"
+    "dotnet.defaultSolution": "Iter.sln"
 }

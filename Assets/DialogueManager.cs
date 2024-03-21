@@ -15,11 +15,11 @@ public class DialogueManager : MonoBehaviour
 
     int activeMessage = 0;
 
-    public void OpenDialogue(\Message[] messages, Actor[] actors){
+    public void OpenDialogue(Message[] messages, Actor[] actors){
         currentMessages = messages;
         currentActors = actors;
         activeMessage = 0;
-        debug.Log("Opening dialogue"+messages.Length);
+        Debug.Log("Opening dialogue"+messages.Length);
         
     
     }

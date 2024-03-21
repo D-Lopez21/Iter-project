@@ -23,6 +23,7 @@ public class DialogueManager : MonoBehaviour
         isActive = true;
         Debug.Log("Opening dialogue"+messages.Length);
         DisplayMessage();
+        backgroundBox.LeanScale(Vector3.one, 0.5f);
         
     
     }
@@ -34,6 +35,7 @@ public class DialogueManager : MonoBehaviour
         Actor actorToDisplay = currentActors[messageToDisplay.actorId];
         actorName.text = actorToDisplay.name;
         actorImage.sprite = actorToDisplay.sprite;
+        AnimateTextColor();
     }
 
     void NextMessage(){
@@ -42,13 +44,22 @@ public class DialogueManager : MonoBehaviour
             DisplayMessage();
         }else{
             Debug.Log("Closing dialogue");
+            backgroundBox.LeanScale(Vector3.zero, 0.5f).setEaseInOutExpo();
             isActive = false;
+
         }
     }
+    void AnimateTextColor(){
+        LeanTween.textAlpha(messageText.rectTransform, 0, 0);
+        LeanTween.textAlpha(messageText.rectTransform, 1, 0.5f);
+
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
+        backgroundBox.transform.localScale = Vector3.zero;
         
     }
 

@@ -8,6 +8,8 @@ TagManager:
   - Upgrade
   - NextLevel
   - PreviousLevel
+  - NextLevelTwo
+  - PreviousLevelTwo
   layers:
   - Default
   - TransparentFX

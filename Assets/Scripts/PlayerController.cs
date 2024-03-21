@@ -224,7 +224,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(!pState.inventoryActive){
+        if (!pState.inventoryActive)
+        {
             GetInputs();
             UpdateJumpVariables();
             CheckLevelUp();
@@ -347,15 +348,19 @@ public class PlayerController : MonoBehaviour
         {
             timeSinceAttack = 0;
 
-            if(currentWeapon == 3){
+            if (currentWeapon == 3)
+            {
 
-                if(arrowAmount > 0){
+                if (arrowAmount > 0)
+                {
                     arrowAmount--;
                     anim.SetTrigger("rangedattack");
                     Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
                 }
 
-            }else{
+            }
+            else
+            {
 
                 if (yAxis == 0 || yAxis < 0 && Grounded())
                 {
@@ -377,7 +382,7 @@ public class PlayerController : MonoBehaviour
                     SlashEffectAtAngle(slashEffect, -90, DownAttackTransform);
                     anim.SetTrigger("DownAttacking");
                 }
-            
+
             }
         }
     }
@@ -396,6 +401,10 @@ public class PlayerController : MonoBehaviour
             if (objectsToHit[i].GetComponent<Enemy>() != null)
             {
                 objectsToHit[i].GetComponent<Enemy>().EnemyHit(damage * damageMultiplier, (transform.position - objectsToHit[i].transform.position).normalized, _recoilStrength);
+            }
+            if (objectsToHit[i].GetComponent<Goblin>() != null)
+            {
+                objectsToHit[i].GetComponent<Goblin>().TakeDamage(damage * damageMultiplier);
             }
         }
 
@@ -705,6 +714,16 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             respawnPoint = transform.position;
         }
+        else if (collision.tag == "PreviousLevelTwo")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+            respawnPoint = transform.position;
+        }
+        else if (collision.tag == "NextLevelTwo")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+            respawnPoint = transform.position;
+        }
     }
 
     public void OnRangedAttack(InputAction.CallbackContext context)
@@ -715,17 +734,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ChangeWeapon(int _weaponNum){
+    public void ChangeWeapon(int _weaponNum)
+    {
 
         int weaponDirection;
-        if(pState.lookingRight){
+        if (pState.lookingRight)
+        {
             weaponDirection = 1;
-        }else{
+        }
+        else
+        {
             weaponDirection = -1;
         }
 
-        switch(_weaponNum){
-            
+        switch (_weaponNum)
+        {
+
             //Basic Sword
             case 0:
                 currentWeapon = 0;
@@ -796,7 +820,7 @@ public class PlayerController : MonoBehaviour
                 timeBetweenAttack = 0.05f;
                 damageMultiplier = 1.4f;
                 break;
-            
+
             //Secret
             case 5:
                 currentWeapon = 5;
@@ -815,20 +839,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SpecialAttack(){
-        if(Input.GetKeyDown(KeyCode.K) && timeSinceAttack >= timeBetweenAttack){
+    void SpecialAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.K) && timeSinceAttack >= timeBetweenAttack)
+        {
             int offsetDirection;
-            if(pState.lookingRight){
+            if (pState.lookingRight)
+            {
                 offsetDirection = 1;
 
-            }else{
+            }
+            else
+            {
                 offsetDirection = -1;
             }
-            
-            switch(currentWeapon){
+
+            switch (currentWeapon)
+            {
 
                 case 0:
-                    if(Mana >= 5){
+                    if (Mana >= 5)
+                    {
                         Instantiate(swordWave, launchOffset.position, transform.rotation);
                         anim.SetTrigger("Attacking");
                         Mana -= 5;
@@ -837,7 +868,8 @@ public class PlayerController : MonoBehaviour
                     break;
 
                 case 1:
-                    if(Mana >= 10){
+                    if (Mana >= 10)
+                    {
                         Instantiate(spiritSlash, new Vector3(launchOffset.position.x + (0.5f * offsetDirection), launchOffset.position.y), transform.rotation);
                         anim.SetTrigger("Attacking");
                         Mana -= 10;
@@ -846,7 +878,8 @@ public class PlayerController : MonoBehaviour
                     break;
 
                 case 2:
-                    if(Mana >= 2){
+                    if (Mana >= 2)
+                    {
                         Instantiate(spellSpam, launchOffset.position, transform.rotation);
                         Mana -= 2;
                         timeSinceAttack = 0;
@@ -854,7 +887,8 @@ public class PlayerController : MonoBehaviour
                     break;
 
                 case 3:
-                    if(Mana >= 3 && arrowAmount > 0){
+                    if (Mana >= 3 && arrowAmount > 0)
+                    {
                         Quaternion tempQua1 = transform.rotation;
                         Quaternion tempQua2 = transform.rotation;
 
@@ -862,8 +896,8 @@ public class PlayerController : MonoBehaviour
                         tempQua1.eulerAngles = new Vector3(tempQua1.eulerAngles.x, tempQua1.eulerAngles.y, 30f);
                         tempQua2.eulerAngles = new Vector3(tempQua1.eulerAngles.x, tempQua1.eulerAngles.y, -30f);
 
-                        Instantiate(projectilePrefab, new Vector2 (launchOffset.position.x, launchOffset.position.y + 0.4f), tempQua1);
-                        Instantiate(projectilePrefab, new Vector2 (launchOffset.position.x, launchOffset.position.y - 0.4f), tempQua2);
+                        Instantiate(projectilePrefab, new Vector2(launchOffset.position.x, launchOffset.position.y + 0.4f), tempQua1);
+                        Instantiate(projectilePrefab, new Vector2(launchOffset.position.x, launchOffset.position.y - 0.4f), tempQua2);
                         Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
 
                         anim.SetTrigger("rangedattack");
@@ -874,15 +908,19 @@ public class PlayerController : MonoBehaviour
 
                     }
                     break;
-                
+
                 case 4:
-                    if(Mana >= 10){
-                        if(Grounded()){
+                    if (Mana >= 10)
+                    {
+                        if (Grounded())
+                        {
                             Instantiate(goku, new Vector3(launchOffset.position.x + (18f * offsetDirection), launchOffset.position.y), transform.rotation);
                             StartCoroutine(DeactivateSpecialAttack());
                             anim.SetTrigger("Attacking");
 
-                        }else{
+                        }
+                        else
+                        {
                             Instantiate(riderKick, new Vector3(transform.position.x + (0.7f * offsetDirection), transform.position.y - 0.8f), transform.rotation, transform);
                         }
 
@@ -892,7 +930,8 @@ public class PlayerController : MonoBehaviour
                     break;
 
                 case 5:
-                    if(Mana >= 10){
+                    if (Mana >= 10)
+                    {
                         Instantiate(secretSpecial, new Vector3(launchOffset.position.x, launchOffset.position.y + 0.7f), transform.rotation);
                         anim.SetTrigger("Attacking");
                         timeSinceAttack = 0;
@@ -903,12 +942,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator DeactivateSpecialAttack(){
+    IEnumerator DeactivateSpecialAttack()
+    {
         yield return new WaitForSeconds(0.20f);
         pState.specialActive = false;
     }
 
-    void SlashEffectAtAngle(GameObject _slashEffect, int _effectAngle, Transform _attackTransform){
+    void SlashEffectAtAngle(GameObject _slashEffect, int _effectAngle, Transform _attackTransform)
+    {
 
         _slashEffect = Instantiate(_slashEffect, _attackTransform);
         _slashEffect.transform.eulerAngles = new Vector3(0, 0, _effectAngle);

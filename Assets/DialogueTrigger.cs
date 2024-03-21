@@ -7,10 +7,15 @@ public class DialogueTrigger : MonoBehaviour
     public Message[] messages;
     public Actor[] actors;
 
-    public void StartDialogue(){
+    public void noentiendo() {
+        Debug.Log("No entiendo");
+    }
+
+    public void StartDialogue() {
         FindObjectOfType<DialogueManager>().OpenDialogue(messages, actors);
     }
 }
+
 [System.Serializable]
 public class Message {
     public int actorId;

@@ -8,6 +8,7 @@ public class Goblin : MonoBehaviour
     public Rigidbody2D rb;
     public PlayerController player;
     private bool lookRigth = true;
+    private bool alredyDead = false;
 
     [Header("Health")]
     [SerializeField] public float health;
@@ -34,18 +35,23 @@ public class Goblin : MonoBehaviour
         anim.SetFloat("Distance", distance);
     }
 
-    public void takeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if(health<=0)
         {
-            //anim.SetTrigger("Die");
+            anim.SetTrigger("Die");
+            Death(5);
         }
     }
 
-    private void Death()
+    private void Death(float _destroyTime)
     {
-        Destroy(gameObject);
+        if(!alredyDead){
+            PlayerController.Instance.Exp += 20;
+            alredyDead = true;
+        }
+        Destroy(gameObject, _destroyTime);
     }
 
     public void lookPlayer()

@@ -24,6 +24,14 @@ public class DialogueManager : MonoBehaviour
     
     }
 
+    public DisplayMessage (){
+        Message messageToDisplay = currentMessages[activeMessage];
+        messageText.text = messageToDisplay.message;
+
+        Actor actorToDisplay = currentActors[messageToDisplay.actorId];
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {

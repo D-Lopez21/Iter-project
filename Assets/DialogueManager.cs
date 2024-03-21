@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
         currentActors = actors;
         activeMessage = 0;
         Debug.Log("Opening dialogue"+messages.Length);
+        DisplayMessage();
         
     
     }
@@ -29,7 +30,8 @@ public class DialogueManager : MonoBehaviour
         messageText.text = messageToDisplay.message;
 
         Actor actorToDisplay = currentActors[messageToDisplay.actorId];
-        
+        actorName.text = actorToDisplay.name;
+        actorSprite.sprite = actorToDisplay.sprite;
     }
 
     // Start is called before the first frame update

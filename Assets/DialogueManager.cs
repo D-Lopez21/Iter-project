@@ -14,11 +14,13 @@ public class DialogueManager : MonoBehaviour
     Actor[] currentActors;
 
     int activeMessage = 0;
+    public static bool isActive = false;
 
     public void OpenDialogue(Message[] messages, Actor[] actors){
         currentMessages = messages;
         currentActors = actors;
         activeMessage = 0;
+        isActive = true;
         Debug.Log("Opening dialogue"+messages.Length);
         DisplayMessage();
         
@@ -34,6 +36,16 @@ public class DialogueManager : MonoBehaviour
         actorImage.sprite = actorToDisplay.sprite;
     }
 
+    void NextMessage(){
+        activeMessage++;
+        if(activeMessage < currentMessages.Length){
+            DisplayMessage();
+        }else{
+            Debug.Log("Closing dialogue");
+            isActive = false;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +55,9 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space)&& isActive==true){
+            NextMessage();
+        }
         
     }
 }

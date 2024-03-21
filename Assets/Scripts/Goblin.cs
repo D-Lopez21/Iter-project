@@ -9,7 +9,6 @@ public class Goblin : MonoBehaviour
     public PlayerController player;
     private bool lookRigth = true;
     private bool alredyDead = false;
-    public GameObject bossGO;
 
     [Header("Health")]
     [SerializeField] public float health;
@@ -22,17 +21,12 @@ public class Goblin : MonoBehaviour
     [SerializeField] public float radioAttack2;
     [SerializeField] public float damage2;
 
-    [SerializeField] public float playerXL;
-    [SerializeField] public float playerXR;
-    [SerializeField] public float playerYU;
-    [SerializeField] public float playerYD;
-
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        bossGO.SetActive(false);
+        //bossGO.SetActive(false);
     }
 
     // Update is called once per frame

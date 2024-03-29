@@ -10,6 +10,12 @@ public class Goblin : MonoBehaviour
     private bool lookRigth = true;
     private bool alredyDead = false;
 
+    [SerializeField] public float playerXL;
+    [SerializeField] public float playerXR;
+    [SerializeField] public float playerYU;
+    [SerializeField] public float playerYD;
+    public bool zone = false;
+
     [Header("Health")]
     [SerializeField] public float health;
 
@@ -34,10 +40,10 @@ public class Goblin : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, PlayerController.Instance.transform.position);
         anim.SetFloat("Distance", distance);
-        //if((playerXL < PlayerController.Instance.transform.position.x && PlayerController.Instance.transform.position.x < playerXR) && (playerYD < PlayerController.Instance.transform.position.y && PlayerController.Instance.transform.position.y < playerYU))
-        //{
-        //    bossGO.SetActive(true);
-        //}
+        if((playerXL < PlayerController.Instance.transform.position.x && PlayerController.Instance.transform.position.x < playerXR) && (playerYD < PlayerController.Instance.transform.position.y && PlayerController.Instance.transform.position.y < playerYU))
+        {
+            zone = true;
+        }
     }
 
     public void TakeDamage(float damage)

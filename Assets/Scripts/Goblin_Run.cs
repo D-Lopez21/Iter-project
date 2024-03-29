@@ -14,8 +14,6 @@ public class Goblin_Run : StateMachineBehaviour
     {
         boss = animator.GetComponent<Goblin>();
         rb = boss.rb;
-
-        boss.lookPlayer();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

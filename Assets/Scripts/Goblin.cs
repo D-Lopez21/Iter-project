@@ -10,6 +10,7 @@ public class Goblin : MonoBehaviour
     private bool lookRigth = true;
     private bool alredyDead = false;
 
+    [Header("Zone")]
     [SerializeField] public float playerXL;
     [SerializeField] public float playerXR;
     [SerializeField] public float playerYU;
@@ -26,6 +27,11 @@ public class Goblin : MonoBehaviour
     [SerializeField] public Transform attackControl2;
     [SerializeField] public float radioAttack2;
     [SerializeField] public float damage2;
+
+    [Header("Shoot")]
+    [SerializeField] public Transform shootController;
+    [SerializeField] public GameObject slashGoblin;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -89,6 +95,8 @@ public class Goblin : MonoBehaviour
 
     public void Attack2()
     {
+        Shoot();
+        
         Collider2D[] objetos = Physics2D.OverlapCircleAll(attackControl2.position, radioAttack2);
         foreach(Collider2D colision in objetos)
         {
@@ -97,6 +105,11 @@ public class Goblin : MonoBehaviour
                 PlayerController.Instance.TakeDamage(damage2);
             }
         }
+    }
+
+    private void Shoot()
+    {
+        Instantiate(slashGoblin, shootController.position, shootController.rotation);
     }
     
     private void OnDrawGizmos()

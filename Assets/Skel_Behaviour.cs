@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class Skel_Behaviour : StateMachineBehaviour
 {
+
+    private Skeleton boss;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetInteger("Num", Random.Range(0, 2));
+        boss = animator.GetComponent<Skeleton>();
+        if(boss.zone)
+        {
+            animator.SetInteger("Num", Random.Range(1, 3));
+        }else{
+            animator.SetInteger("Num", 0);
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

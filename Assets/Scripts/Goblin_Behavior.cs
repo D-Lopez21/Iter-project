@@ -13,6 +13,8 @@ public class Goblin_Behavior : StateMachineBehaviour
         if(boss.zone)
         {
             animator.SetInteger("Num", Random.Range(1, 3));
+        }else{
+            animator.SetInteger("Num", 0);
         }
     }
 

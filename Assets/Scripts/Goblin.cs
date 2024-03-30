@@ -15,7 +15,7 @@ public class Goblin : MonoBehaviour
     [SerializeField] public float playerXR;
     [SerializeField] public float playerYU;
     [SerializeField] public float playerYD;
-    public bool zone = false;
+    [SerializeField] public bool zone = false;
 
     [Header("Health")]
     [SerializeField] public float health;
@@ -38,7 +38,6 @@ public class Goblin : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        //bossGO.SetActive(false);
     }
 
     // Update is called once per frame

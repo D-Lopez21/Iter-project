@@ -406,6 +406,10 @@ public class PlayerController : MonoBehaviour
             {
                 objectsToHit[i].GetComponent<Goblin>().TakeDamage(damage * damageMultiplier);
             }
+            if (objectsToHit[i].GetComponent<Ghost>() != null)
+            {
+                objectsToHit[i].GetComponent<Ghost>().TakeDamage(damage * damageMultiplier);
+            }
         }
 
     }

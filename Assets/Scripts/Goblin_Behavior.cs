@@ -12,7 +12,13 @@ public class Goblin_Behavior : StateMachineBehaviour
         boss = animator.GetComponent<Goblin>();
         if(boss.zone)
         {
-            animator.SetInteger("Num", Random.Range(1, 3));
+            if(boss.fase == 1)
+            {
+                animator.SetInteger("Num", Random.Range(1, 3));
+            }else{
+                animator.SetInteger("Num", Random.Range(1, 4));
+            }
+            
         }else{
             animator.SetInteger("Num", 0);
         }

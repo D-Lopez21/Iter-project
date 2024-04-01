@@ -33,6 +33,8 @@ public class Goblin : MonoBehaviour
     [Header("Shoot")]
     [SerializeField] public Transform shootController;
     [SerializeField] public GameObject slashGoblin;
+    [SerializeField] public Transform bombController;
+    [SerializeField] public GameObject bombGoblin;
 
 
     // Start is called before the first frame update
@@ -121,6 +123,16 @@ public class Goblin : MonoBehaviour
                 PlayerController.Instance.TakeDamage(damage2);
             }
         }
+    }
+
+    public void Attack3()
+    {
+        Bomb();
+    }
+
+    private void Bomb()
+    {
+        Instantiate(bombGoblin, bombController.position, bombController.rotation);
     }
 
     private void Shoot()

@@ -367,7 +367,7 @@ MonoBehaviour:
   expChanged:
     m_PersistentCalls:
       m_Calls: []
-  walkSpeed: 20
+  walkSpeed: 15
   jumpForce: 25
   jumpBufferFrames: 8
   coyoteTime: 0.1
@@ -399,10 +399,10 @@ MonoBehaviour:
   recoilYSteps: 5
   recoilXSpeed: 20
   recoilYSpeed: 20
-  _health: 10
-  maxHealth: 10
-  _mana: 10
-  maxMana: 10
+  _health: 50
+  maxHealth: 50
+  _mana: 500
+  maxMana: 500
   wallSlidingSpeed: 2
   wallCheck: {fileID: 1669624292}
   wallLayer:
@@ -419,18 +419,18 @@ MonoBehaviour:
   rb: {fileID: 0}
   gravity: 0
   colli: {fileID: 0}
-  unlockedDash: 0
-  unlockedDoubleJump: 0
-  unlockedWallJump: 0
-  unlockedLong: 0
-  unlockedStaff: 0
-  unlockedBow: 0
-  unlockedGauntlet: 0
-  unlockedSecret: 0
+  unlockedDash: 1
+  unlockedDoubleJump: 1
+  unlockedWallJump: 1
+  unlockedLong: 1
+  unlockedStaff: 1
+  unlockedBow: 1
+  unlockedGauntlet: 1
+  unlockedSecret: 1
   currentWeapon: 0
-  arrowAmount: 0
-  healthPotions: 0
-  manaPotions: 0
+  arrowAmount: 20
+  healthPotions: 20
+  manaPotions: 20
   weaponList: 
   swordWave: {fileID: 3285859722842204894, guid: 959ebeaebd71959418b4fbc6929966a8, type: 3}
   spiritSlash: {fileID: 1733544542817905868, guid: 6d4a548d52de8824183a9c09a6f4253a, type: 3}
@@ -575,7 +575,7 @@ Transform:
   m_GameObject: {fileID: 44509477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 249.6, y: 2.05, z: 0}
+  m_LocalPosition: {x: 214.7, y: 22, z: 0}
   m_LocalScale: {x: 1, y: 0.9565, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12665,7 +12665,7 @@ GameObject:
   - component: {fileID: 1179982474}
   m_Layer: 0
   m_Name: Change (2)
-  m_TagString: NextLevel
+  m_TagString: NextLevelTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!pState.inventoryActive)
+        if (!pState.inventoryActive && !DialogueManager.isActive)
         {
             GetInputs();
             UpdateJumpVariables();

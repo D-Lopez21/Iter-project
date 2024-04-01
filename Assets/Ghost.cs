@@ -12,6 +12,7 @@ public class Ghost : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] public float health;
+    [SerializeField] public float maxHealth;
 
     [Header("Damage")]
     [SerializeField] public Transform attackControl;
@@ -23,6 +24,7 @@ public class Ghost : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -38,7 +40,7 @@ public class Ghost : MonoBehaviour
         if(health<=0)
         {
             anim.SetTrigger("Die");
-            Death(5);
+            Death(2);
         }
     }
 
@@ -68,6 +70,13 @@ public class Ghost : MonoBehaviour
             if(colision.CompareTag("Player"))
             {
                 PlayerController.Instance.TakeDamage(damage);
+
+                if(health + damage > maxHealth)
+                {
+                    health = maxHealth;
+                }else{
+                    health += damage;
+                }
             }
         }
     }

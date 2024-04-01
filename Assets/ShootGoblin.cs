@@ -18,6 +18,11 @@ public class ShootGoblin : MonoBehaviour
     void Update()
     {
         transform.Translate(Time.deltaTime * speed * Vector2.right);
+        float distance = Vector2.Distance(transform.position, PlayerController.Instance.transform.position);
+        if(distance > 80)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D _other)

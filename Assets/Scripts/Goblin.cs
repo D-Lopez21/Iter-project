@@ -19,6 +19,8 @@ public class Goblin : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] public float health;
+    [SerializeField] public float maxHealth;
+    [SerializeField] public int fase;
 
     [Header("Damage")]
     [SerializeField] public Transform attackControl1;
@@ -38,6 +40,8 @@ public class Goblin : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        fase = 1;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -54,11 +58,24 @@ public class Goblin : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if(health<=0)
+        if(health<=0 && fase == 2)
         {
             anim.SetTrigger("Die");
             Death(5);
         }
+        if(health<=0 && fase == 1)
+        {
+            anim.SetTrigger("Fall");
+            health = maxHealth;
+            fase = 2;
+            StartCoroutine(StandUp());
+        }
+    }
+
+    IEnumerator StandUp()
+    {
+        yield return new WaitForSeconds(2f);
+        anim.SetTrigger("Up");
     }
 
     private void Death(float _destroyTime)

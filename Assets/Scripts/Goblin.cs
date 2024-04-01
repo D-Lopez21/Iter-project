@@ -9,6 +9,7 @@ public class Goblin : MonoBehaviour
     public PlayerController player;
     private bool lookRigth = true;
     private bool alredyDead = false;
+    private bool invin = false;
 
     [Header("Zone")]
     [SerializeField] public float playerXL;
@@ -59,25 +60,31 @@ public class Goblin : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        if(health<=0 && fase == 2)
+        if(!invin)
         {
-            anim.SetTrigger("Die");
-            Death(5);
+            health -= damage;
+            if(health<=0 && fase == 2)
+            {
+                anim.SetTrigger("Die");
+                Death(5);
+            }
+            if(health<=0 && fase == 1)
+            {
+                anim.SetTrigger("Fall");
+                health = maxHealth;
+                fase = 2;
+                StartCoroutine(StandUp());
+            }
         }
-        if(health<=0 && fase == 1)
-        {
-            anim.SetTrigger("Fall");
-            health = maxHealth;
-            fase = 2;
-            StartCoroutine(StandUp());
-        }
+        
     }
 
     IEnumerator StandUp()
     {
+        invin = true;
         yield return new WaitForSeconds(2f);
         anim.SetTrigger("Up");
+        invin = false;
     }
 
     private void Death(float _destroyTime)

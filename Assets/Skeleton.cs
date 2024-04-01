@@ -10,6 +10,8 @@ public class Skeleton : MonoBehaviour
     public PlayerController player;
     private bool lookRigth = true;
     private bool alredyDead = false;
+    public GameObject ghost;
+    private bool dropped = false;
 
     [Header("Zone")]
     [SerializeField] public float playerXL;
@@ -57,7 +59,17 @@ public class Skeleton : MonoBehaviour
             transform.localScale = new Vector2(0.8f, 0.8f);
             anim.SetTrigger("Death");
             Death(3);
+            if(!dropped)
+            {
+                DropItem();
+                dropped = true;
+            }
         }
+    }
+
+    private void DropItem()
+    {
+        Instantiate(ghost, transform.position, Quaternion.identity);
     }
 
     private void Death(float _destroyTime)

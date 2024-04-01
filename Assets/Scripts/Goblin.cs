@@ -22,7 +22,7 @@ public class Goblin : MonoBehaviour
 
     [Header("Damage")]
     [SerializeField] public Transform attackControl1;
-    [SerializeField] Vector2 attackArea1;
+    [SerializeField] public Vector2 attackArea1;
     [SerializeField] public float damage1;
     [SerializeField] public Transform attackControl2;
     [SerializeField] public float radioAttack2;

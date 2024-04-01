@@ -410,6 +410,10 @@ public class PlayerController : MonoBehaviour
             {
                 objectsToHit[i].GetComponent<Ghost>().TakeDamage(damage * damageMultiplier);
             }
+            if (objectsToHit[i].GetComponent<Skeleton>() != null)
+            {
+                objectsToHit[i].GetComponent<Skeleton>().TakeDamage(damage * damageMultiplier);
+            }
         }
 
     }

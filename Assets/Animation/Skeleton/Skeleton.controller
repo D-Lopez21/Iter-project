@@ -10,7 +10,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Distance
-    m_EventTreshold: 1.5
+    m_EventTreshold: 2.3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5935237459634010747}
   m_Solo: 0
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067fff32701d0344993efe494b93e2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 6
 --- !u!114 &8461761770111062010
 MonoBehaviour:
   m_ObjectHideFlags: 1

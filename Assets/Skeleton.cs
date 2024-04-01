@@ -54,8 +54,9 @@ public class Skeleton : MonoBehaviour
         health -= damage;
         if(health<=0)
         {
+            transform.localScale = new Vector2(0.8f, 0.8f);
             anim.SetTrigger("Death");
-            Death(5);
+            Death(3);
         }
     }
 

@@ -16,7 +16,7 @@ public class Ghost : MonoBehaviour
 
     [Header("Damage")]
     [SerializeField] public Transform attackControl;
-    [SerializeField] public float radio;
+    [SerializeField] public Vector2 attackArea;
     [SerializeField] public float damage;
 
     // Start is called before the first frame update
@@ -64,7 +64,7 @@ public class Ghost : MonoBehaviour
 
     public void Attack()
     {
-        Collider2D[] objetos = Physics2D.OverlapCircleAll(attackControl.position, radio);
+        Collider2D[] objetos = Physics2D.OverlapBoxAll(attackControl.position, attackArea, 0);
         foreach(Collider2D colision in objetos)
         {
             if(colision.CompareTag("Player"))
@@ -84,6 +84,6 @@ public class Ghost : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackControl.position, radio);
+        Gizmos.DrawWireCube(attackControl.position, attackArea);
     }
 }

@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(!PlayerController.Instance.pState.inventoryActive){
+        if(!PlayerController.Instance.pState.inventoryActive && !PlayerController.Instance.skillTreeActive){
             if(isRecoiling){
                 if(recoilTimer < recoilLength){
                     recoilTimer += Time.deltaTime;

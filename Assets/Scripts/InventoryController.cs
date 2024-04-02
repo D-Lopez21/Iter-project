@@ -77,7 +77,7 @@ public class InventoryController : MonoBehaviour
     }
 
     void checkInventory(){
-        if(Input.GetButtonDown("Inventory") && !activeTransition && !playerObj.pState.activeUI){
+        if(Input.GetButtonDown("Inventory") && !activeTransition && !playerObj.pState.activeUI && !playerObj.skillTreeActive){
             if(!playerObj.pState.inventoryActive){
                 playerObj.pState.inventoryActive = true;
                 playerObj.rb.velocity = new Vector2(0, 0);

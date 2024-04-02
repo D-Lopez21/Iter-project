@@ -95,6 +95,9 @@ public class PlayerController : MonoBehaviour
             manaChanged?.Invoke(_mana, maxMana);
         }
     }
+
+    private float tempMana;
+
     [SerializeField] public int maxMana = 10;
     [Space(5)]
 
@@ -224,7 +227,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!pState.inventoryActive && !DialogueManager.isActive)
+        if (!pState.inventoryActive && !DialogueManager.isActive && !skillTreeActive)
         {
             GetInputs();
             UpdateJumpVariables();
@@ -343,6 +346,13 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         timeSinceAttack += Time.deltaTime;
+        if(Mana < maxMana){
+            tempMana += Time.deltaTime;
+        }
+        if(tempMana >= 2f && Mana < maxMana){
+            Mana += 1;
+            tempMana = 0;
+        }
 
         if ((attack || Input.GetKeyDown(KeyCode.J)) && timeSinceAttack >= timeBetweenAttack)
         {

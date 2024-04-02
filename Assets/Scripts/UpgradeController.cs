@@ -31,8 +31,9 @@ public class UpgradeController : MonoBehaviour
 //    }
 
     void upgradeStart(){
-        if(stationColli.IsTouching(PlayerController.Instance.colli) && Input.GetButtonDown("SkillTree") && PlayerController.Instance.skillPoints > 0 && !PlayerController.Instance.skillTreeActive){
+        if(stationColli.IsTouching(PlayerController.Instance.colli) && Input.GetButtonDown("SkillTree") && PlayerController.Instance.skillPoints > 0 && !PlayerController.Instance.skillTreeActive && !PlayerController.Instance.pState.inventoryActive){
             PlayerController.Instance.skillTreeActive = true;
+            PlayerController.Instance.rb.velocity = new Vector2(0, 0);
             upgradeCanvas.SetActive(true);
             FadeUIIn(0.2f);
         }

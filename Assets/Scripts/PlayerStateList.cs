@@ -10,6 +10,7 @@ public class PlayerStateList : MonoBehaviour
     public bool lookingRight;
     public bool invincible;
     public bool inventoryActive = false;
+    public bool upgradeActive = false;
     public bool activeUI = false;
     public bool specialActive = false;
     

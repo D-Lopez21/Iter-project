@@ -82,7 +82,7 @@ public class Goblin : MonoBehaviour
     IEnumerator StandUp()
     {
         invin = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         anim.SetTrigger("Up");
         invin = false;
     }

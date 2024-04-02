@@ -7,8 +7,6 @@ public class F_Eye : Enemy
 
     [SerializeField] public float chaseDistance;
 
-    public GameObject itemDrops;
-
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -57,7 +55,6 @@ public class F_Eye : Enemy
             ChangeState(EnemyStates.Eye_stunned);
         }else{
             ChangeState(EnemyStates.Eye_die);
-            DropItem();
         }
     }
 
@@ -87,10 +84,5 @@ public class F_Eye : Enemy
         {
             anim.SetTrigger("Die");
         }
-    }
-
-    private void DropItem()
-    {
-        Instantiate(itemDrops, transform.position, Quaternion.identity);
     }
 }

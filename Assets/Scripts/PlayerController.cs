@@ -414,6 +414,10 @@ public class PlayerController : MonoBehaviour
             {
                 objectsToHit[i].GetComponent<Skeleton>().TakeDamage(damage * damageMultiplier);
             }
+            if (objectsToHit[i].GetComponent<Eye_Boss>() != null)
+            {
+                objectsToHit[i].GetComponent<Eye_Boss>().TakeDamage(damage * damageMultiplier);
+            }
         }
 
     }

@@ -16,19 +16,22 @@ public class DialogueManager : MonoBehaviour
     int activeMessage = 0;
     public static bool isActive = false;
 
-    public void OpenDialogue(Message[] messages, Actor[] actors){
+    public void OpenDialogue(Message[] messages, Actor[] actors)
+    {
         currentMessages = messages;
         currentActors = actors;
         activeMessage = 0;
         isActive = true;
-        Debug.Log("Opening dialogue"+messages.Length);
+        Debug.Log("Opening dialogue" + messages.Length);
         DisplayMessage();
         backgroundBox.LeanScale(Vector3.one, 0.5f);
-        
-    
+        PlayerController.Instance.rb.velocity = new Vector2(0, 0);
+
+
     }
 
-    void DisplayMessage (){
+    void DisplayMessage()
+    {
         Message messageToDisplay = currentMessages[activeMessage];
         messageText.text = messageToDisplay.message;
 
@@ -38,18 +41,23 @@ public class DialogueManager : MonoBehaviour
         AnimateTextColor();
     }
 
-    void NextMessage(){
+    void NextMessage()
+    {
         activeMessage++;
-        if(activeMessage < currentMessages.Length){
+        if (activeMessage < currentMessages.Length)
+        {
             DisplayMessage();
-        }else{
+        }
+        else
+        {
             Debug.Log("Closing dialogue");
             backgroundBox.LeanScale(Vector3.zero, 0.5f).setEaseInOutExpo();
             isActive = false;
 
         }
     }
-    void AnimateTextColor(){
+    void AnimateTextColor()
+    {
         LeanTween.textAlpha(messageText.rectTransform, 0, 0);
         LeanTween.textAlpha(messageText.rectTransform, 1, 0.5f);
 
@@ -60,15 +68,16 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         backgroundBox.transform.localScale = Vector3.zero;
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)&& isActive==true){
+        if (Input.GetKeyDown(KeyCode.Space) && isActive == true)
+        {
             NextMessage();
         }
-        
+
     }
 }

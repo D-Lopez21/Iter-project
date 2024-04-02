@@ -9,6 +9,8 @@ public class Ghost : MonoBehaviour
     public PlayerController player;
     private bool lookRigth = true;
     private bool alredyDead = false;
+    public GameObject secret;
+    private bool dropped = false;
 
     [Header("Health")]
     [SerializeField] public float health;
@@ -41,6 +43,11 @@ public class Ghost : MonoBehaviour
         {
             anim.SetTrigger("Die");
             Death(2);
+            if(!dropped)
+            {
+                DropItem();
+                dropped = true;
+            }
         }
     }
 
@@ -60,6 +67,11 @@ public class Ghost : MonoBehaviour
             lookRigth = !lookRigth;
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
         }
+    }
+
+    private void DropItem()
+    {
+        Instantiate(secret, transform.position, Quaternion.identity);
     }
 
     public void Attack()

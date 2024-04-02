@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!pState.inventoryActive)
+        if (!pState.inventoryActive && !DialogueManager.isActive)
         {
             GetInputs();
             UpdateJumpVariables();
@@ -413,6 +413,10 @@ public class PlayerController : MonoBehaviour
             if (objectsToHit[i].GetComponent<Skeleton>() != null)
             {
                 objectsToHit[i].GetComponent<Skeleton>().TakeDamage(damage * damageMultiplier);
+            }
+            if (objectsToHit[i].GetComponent<Eye_Boss>() != null)
+            {
+                objectsToHit[i].GetComponent<Eye_Boss>().TakeDamage(damage * damageMultiplier);
             }
         }
 

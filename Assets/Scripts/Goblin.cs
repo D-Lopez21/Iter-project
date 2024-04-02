@@ -9,6 +9,7 @@ public class Goblin : MonoBehaviour
     public PlayerController player;
     private bool lookRigth = true;
     private bool alredyDead = false;
+    private bool invin = false;
 
     [Header("Zone")]
     [SerializeField] public float playerXL;
@@ -33,6 +34,8 @@ public class Goblin : MonoBehaviour
     [Header("Shoot")]
     [SerializeField] public Transform shootController;
     [SerializeField] public GameObject slashGoblin;
+    [SerializeField] public Transform bombController;
+    [SerializeField] public GameObject bombGoblin;
 
 
     // Start is called before the first frame update
@@ -57,25 +60,31 @@ public class Goblin : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        if(health<=0 && fase == 2)
+        if(!invin)
         {
-            anim.SetTrigger("Die");
-            Death(5);
+            health -= damage;
+            if(health<=0 && fase == 2)
+            {
+                anim.SetTrigger("Die");
+                Death(5);
+            }
+            if(health<=0 && fase == 1)
+            {
+                anim.SetTrigger("Fall");
+                health = maxHealth;
+                fase = 2;
+                StartCoroutine(StandUp());
+            }
         }
-        if(health<=0 && fase == 1)
-        {
-            anim.SetTrigger("Fall");
-            health = maxHealth;
-            fase = 2;
-            StartCoroutine(StandUp());
-        }
+        
     }
 
     IEnumerator StandUp()
     {
-        yield return new WaitForSeconds(2f);
+        invin = true;
+        yield return new WaitForSeconds(3f);
         anim.SetTrigger("Up");
+        invin = false;
     }
 
     private void Death(float _destroyTime)
@@ -121,6 +130,16 @@ public class Goblin : MonoBehaviour
                 PlayerController.Instance.TakeDamage(damage2);
             }
         }
+    }
+
+    public void Attack3()
+    {
+        Bomb();
+    }
+
+    private void Bomb()
+    {
+        Instantiate(bombGoblin, bombController.position, bombController.rotation);
     }
 
     private void Shoot()

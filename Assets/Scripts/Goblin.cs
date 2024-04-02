@@ -10,6 +10,7 @@ public class Goblin : MonoBehaviour
     private bool lookRigth = true;
     private bool alredyDead = false;
     private bool invin = false;
+    public GameObject wall;
 
     [Header("Zone")]
     [SerializeField] public float playerXL;
@@ -55,6 +56,7 @@ public class Goblin : MonoBehaviour
         if((playerXL < PlayerController.Instance.transform.position.x && PlayerController.Instance.transform.position.x < playerXR) && (playerYD < PlayerController.Instance.transform.position.y && PlayerController.Instance.transform.position.y < playerYU))
         {
             zone = true;
+            wall.transform.position = new Vector2(274.49f, 40.5f);
         }
     }
 
@@ -89,6 +91,7 @@ public class Goblin : MonoBehaviour
 
     private void Death(float _destroyTime)
     {
+        Destroy(wall);
         if(!alredyDead){
             PlayerController.Instance.Exp += 20;
             alredyDead = true;

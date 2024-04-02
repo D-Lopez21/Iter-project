@@ -13,6 +13,7 @@ public class Eye_Boss : MonoBehaviour
     public Rigidbody2D rb;
     private bool lookRigth = true;
     private bool alredyDead = false;
+    public Transform objetivo;
 
     [Header("Zone")]
     [SerializeField] public float playerXL;
@@ -20,6 +21,10 @@ public class Eye_Boss : MonoBehaviour
     [SerializeField] public float playerYU;
     [SerializeField] public float playerYD;
     [SerializeField] public bool zone = false;
+
+    [Header("Shoot")]
+    [SerializeField] public Transform shootController;
+    [SerializeField] public GameObject proyectil;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +41,10 @@ public class Eye_Boss : MonoBehaviour
             zone = true;
         }
         lookPlayer();
+
+        float radianes = Mathf.Atan2(objetivo.position.y - shootController.position.y, objetivo.position.x - shootController.position.x);
+        float grados = (180/Mathf.PI) * radianes;
+        shootController.rotation = Quaternion.Euler(0, 0, grados);
     }
 
     public void TakeDamage(float damage)
@@ -61,6 +70,16 @@ public class Eye_Boss : MonoBehaviour
             alredyDead = true;
         }
         Destroy(gameObject, _destroyTime);
+    }
+
+    public void Attack()
+    {
+        Shoot();
+    }
+
+    private void Shoot()
+    {
+        Instantiate(proyectil, shootController.position, shootController.rotation);
     }
 
     private void DropItem()
